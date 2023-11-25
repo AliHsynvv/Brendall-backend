@@ -22,7 +22,7 @@ public class Product {
     long productId;
     String productName;
     String description;
-    String productIcon;
+    String productIcons;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "pia_fk")
