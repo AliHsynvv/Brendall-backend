@@ -18,8 +18,8 @@ public class Size {
     long sizeId;
     String sizeName;
 
-//    @ManyToOne
-//    User user;
+    @ManyToOne
+    Product product;
 
 
 }

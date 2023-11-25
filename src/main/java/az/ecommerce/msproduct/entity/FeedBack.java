@@ -16,6 +16,8 @@ public class FeedBack {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long feedId;
 
+    double rank;
+
     @ManyToOne
     Product product;
 
