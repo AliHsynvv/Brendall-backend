@@ -1,4 +1,4 @@
-package az.ecommerce.msproduct.dto;
+package az.ecommerce.msproduct.dto.request;
 
 import lombok.*;
 

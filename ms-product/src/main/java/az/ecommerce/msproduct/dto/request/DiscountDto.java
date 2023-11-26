@@ -1,4 +1,4 @@
-package az.ecommerce.msproduct.dto;
+package az.ecommerce.msproduct.dto.request;
 
 import lombok.*;
 
@@ -6,10 +6,10 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-public class PriceDto {
+public class DiscountDto {
 
-    long priceId;
-    BigDecimal amount;
+    long discountId;
+    BigDecimal percentage;
     LocalDateTime startDate;
     LocalDateTime endDate;
     ProductDto products;

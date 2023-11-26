@@ -1,6 +1,5 @@
-package az.ecommerce.msproduct.dto;
+package az.ecommerce.msproduct.dto.request;
 
-import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;

@@ -1,7 +1,8 @@
-package az.ecommerce.msproduct.dto;
+package az.ecommerce.msproduct.dto.response;
 
-import lombok.*;
+import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -12,6 +13,7 @@ public class StoreDto {
     String storeIcon;
     String storeLocation;
     List<ProductDto> productList;
+    LocalDateTime responseAt;
 
 
 
