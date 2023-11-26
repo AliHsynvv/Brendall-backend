@@ -14,8 +14,8 @@ public class ProductResp {
     String productIcons;
     IsActiveResp isActive;
     List<ColourResp> colourList;
-    List<PriceResp> priceList;
-    List<DiscountResp> discountList;
+    PriceResp price;
+    DiscountResp discount;
     List<FeedBackResp> feedBackList;
     List<StoreResp> storeList;
     LocalDateTime responseAt;

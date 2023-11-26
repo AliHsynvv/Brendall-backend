@@ -6,7 +6,9 @@ import lombok.*;
 public class FeedBackDto {
 
     long feedId;
-    double rank;
+    double feedRank;
+    String feedIcon;
+    String feedComment;
     ProductDto product;
 
 

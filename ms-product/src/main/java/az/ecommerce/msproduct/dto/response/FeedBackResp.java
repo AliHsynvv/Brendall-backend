@@ -8,7 +8,9 @@ import java.time.LocalDateTime;
 public class FeedBackResp {
 
     long feedId;
-    double rank;
+    double feedRank;
+    String feedIcon;
+    String feedComment;
     ProductResp product;
     LocalDateTime responseAt;
 

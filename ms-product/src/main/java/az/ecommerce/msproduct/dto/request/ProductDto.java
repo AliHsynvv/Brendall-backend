@@ -13,8 +13,8 @@ public class ProductDto {
     String productIcons;
     IsActiveDto isActive;
     List<ColourDto> colourList;
-    List<PriceDto> priceList;
-    List<DiscountDto> discountList;
+    PriceDto price;
+    DiscountDto discount;
     List<FeedBackDto> feedBackList;
     List<StoreDto> storeList;
 

@@ -11,7 +11,7 @@ import java.util.List;
 public interface ProductInter {
     void create(MultipartFile multipartFile, ProductDto productDto);
 
-    ProductDto findBy(long id);
+    ProductDto findById(long id);
 
     List<ProductDto> getAllProducts();
 

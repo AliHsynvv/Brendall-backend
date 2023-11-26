@@ -29,7 +29,7 @@ public class ProductImpl implements ProductInter {
 
     @Override
     public void create(MultipartFile multipartFile, ProductDto productDto) {
-        log.info("Create started");
+        log.info("Create.service started");
         Product product = null;
 
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
@@ -46,29 +46,29 @@ public class ProductImpl implements ProductInter {
             throw new ProductException(ErrorCodeEnum.UNKNOWN_ERROR);
         }
         productRepo.save(product);
-        log.info("Created successed");
+        log.info("Created.service successed");
     }
 
     @Override
-    public ProductDto findBy(long id) {
-        log.info("FindBy started");
+    public ProductDto findById(long id) {
+        log.info("FindById.service started");
         Optional<Product> findP = productRepo.findById(id);
         if (findP.isEmpty()) {
             throw new ProductException(ErrorCodeEnum.PRODUCT_NOT_FOUND);
         }
-        log.info("FindById successed");
+        log.info("FindById.service successed");
         return findP.map(productE -> modelMapper.map(productE, ProductDto.class)).orElseThrow();
 
     }
 
     @Override
     public List<ProductDto> getAllProducts() {
-        log.info("GetAllProducts started");
+        log.info("GetAllProducts.service started");
         List<Product> getAllProducts = productRepo.findAll();
         if (getAllProducts.isEmpty()) {
             throw new ProductException(ErrorCodeEnum.UNKNOWN_ERROR);
         }
-        log.info("GetAllProducts successed");
+        log.info("GetAllProducts.service successed");
         return getAllProducts.stream()
                 .map(trainingE -> modelMapper.map(trainingE, ProductDto.class))
                 .collect(Collectors.toList());
@@ -76,19 +76,19 @@ public class ProductImpl implements ProductInter {
 
     @Override
     public void delete(long id) {
-        log.info("Delete started");
+        log.info("Delete.service started");
         Optional<Product> deleteP = productRepo.findById(id);
         if (deleteP.isEmpty()) {
             throw new ProductException(ErrorCodeEnum.PRODUCT_NOT_FOUND);
         } else {
             productRepo.deleteById(id);
         }
-        log.info("Delete successed");
+        log.info("Delete.service successed");
     }
 
     @Override
     public Product update(ProductDto productDto, long id) {
-        log.info("Update started");
+        log.info("Update.service started");
         Optional<Product> updateP = productRepo.findById(id);
         if (updateP.isPresent()) {
             Product newProduct = updateP.get();
@@ -99,7 +99,7 @@ public class ProductImpl implements ProductInter {
 
             return productRepo.save(newProduct);
         }
-        log.info("Update successed");
+        log.info("Update.service successed");
         throw new ProductException(ErrorCodeEnum.NOT_ENOUGH_PRODUCT);
 
     }
