@@ -30,7 +30,7 @@ public class ProductImpl implements ProductInter {
     @Override
     public void create(MultipartFile multipartFile, ProductDto productDto) {
         log.info("Create.service started");
-        Product product = null;
+        Product product;
 
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
         if (fileName.contains("..")){
@@ -41,6 +41,14 @@ public class ProductImpl implements ProductInter {
                     .productIcons(Base64.getEncoder().encodeToString(multipartFile.getBytes()))
                     .description(productDto.getDescription())
                     .productName(productDto.getProductName())
+                    .isActive(productDto.getIsActive())
+                    .colourList(productDto.getColourList())
+                    .price(productDto.getPrice())
+                    .discount(productDto.getDiscount())
+                    .feedBackList(productDto.getFeedBackList())
+                    .storeList(productDto.getStoreList())
+                    .gender(productDto.getGender())
+                    .category(productDto.getCategory())
                     .build();
         } catch (IOException e) {
             throw new ProductException(ErrorCodeEnum.UNKNOWN_ERROR);
@@ -96,6 +104,14 @@ public class ProductImpl implements ProductInter {
             newProduct.setProductIcons(productDto.getProductIcons());
             newProduct.setDescription(productDto.getDescription());
             newProduct.setProductName(productDto.getProductName());
+            newProduct.setIsActive(productDto.getIsActive());
+            newProduct.setColourList(productDto.getColourList());
+            newProduct.setPrice(productDto.getPrice());
+            newProduct.setDiscount(productDto.getDiscount());
+            newProduct.setFeedBackList(productDto.getFeedBackList());
+            newProduct.setStoreList(productDto.getStoreList());
+            newProduct.setGender(productDto.getGender());
+            newProduct.setCategory(productDto.getCategory());
 
             return productRepo.save(newProduct);
         }

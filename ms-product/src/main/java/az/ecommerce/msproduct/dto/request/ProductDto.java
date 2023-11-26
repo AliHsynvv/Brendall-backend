@@ -1,5 +1,6 @@
 package az.ecommerce.msproduct.dto.request;
 
+import az.ecommerce.msproduct.entity.*;
 import lombok.*;
 
 import java.util.List;
@@ -11,12 +12,14 @@ public class ProductDto {
     String productName;
     String description;
     String productIcons;
-    IsActiveDto isActive;
-    List<ColourDto> colourList;
-    PriceDto price;
-    DiscountDto discount;
-    List<FeedBackDto> feedBackList;
-    List<StoreDto> storeList;
+    IsActive isActive;
+    List<Colour> colourList;
+    Price price;
+    Discount discount;
+    List<FeedBack> feedBackList;
+    List<Store> storeList;
+    Gender gender;
+    Category category;
 
 
 }
