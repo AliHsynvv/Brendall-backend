@@ -6,12 +6,12 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-public class PriceDto {
+public class PriceResp {
 
     long priceId;
     BigDecimal amount;
     LocalDateTime startDate;
     LocalDateTime endDate;
-    ProductDto products;
+    ProductResp products;
     LocalDateTime responseAt;
 }

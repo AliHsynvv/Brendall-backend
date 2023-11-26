@@ -6,11 +6,11 @@ import java.time.LocalDateTime;
 
 @Data
 
-public class IsActiveDto {
+public class IsActiveResp {
 
     long activeId;
     boolean isActive;
-    ProductDto product;
+    ProductResp product;
     LocalDateTime responseAt;
 
 }

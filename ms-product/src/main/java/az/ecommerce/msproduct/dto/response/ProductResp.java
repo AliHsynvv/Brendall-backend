@@ -6,18 +6,18 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-public class ProductDto {
+public class ProductResp {
 
     long productId;
     String productName;
     String description;
     String productIcons;
-    IsActiveDto isActive;
-    List<ColourDto> colourList;
-    List<PriceDto> priceList;
-    List<DiscountDto> discountList;
-    List<FeedBackDto> feedBackList;
-    List<StoreDto> storeList;
+    IsActiveResp isActive;
+    List<ColourResp> colourList;
+    List<PriceResp> priceList;
+    List<DiscountResp> discountList;
+    List<FeedBackResp> feedBackList;
+    List<StoreResp> storeList;
     LocalDateTime responseAt;
 
 

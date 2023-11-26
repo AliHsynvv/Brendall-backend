@@ -6,13 +6,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-public class StoreDto {
+public class StoreResp {
 
     long storeId;
     String storeName;
     String storeIcon;
     String storeLocation;
-    List<ProductDto> productList;
+    List<ProductResp> productList;
     LocalDateTime responseAt;
 
 

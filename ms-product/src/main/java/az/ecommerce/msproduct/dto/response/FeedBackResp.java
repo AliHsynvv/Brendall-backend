@@ -5,11 +5,11 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class FeedBackDto {
+public class FeedBackResp {
 
     long feedId;
     double rank;
-    ProductDto product;
+    ProductResp product;
     LocalDateTime responseAt;
 
 

@@ -5,11 +5,11 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class ColourDto {
+public class ColourResp {
 
     long colourId;
     String colourName;
-    ProductDto products;
+    ProductResp products;
     LocalDateTime responseAt;
 
 

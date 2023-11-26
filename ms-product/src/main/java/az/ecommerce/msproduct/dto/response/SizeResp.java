@@ -5,11 +5,11 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class SizeDto {
+public class SizeResp {
 
     long sizeId;
     String sizeName;
-    ProductDto product;
+    ProductResp product;
     LocalDateTime responseAt;
 
 
