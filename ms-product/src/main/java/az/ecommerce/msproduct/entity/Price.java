@@ -22,6 +22,6 @@ public class Price {
     LocalDateTime startDate;
     LocalDateTime endDate;
 
-    @ManyToOne
+    @OneToOne(mappedBy = "price")
     Product products;
 }

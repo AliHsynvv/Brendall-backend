@@ -1,6 +1,8 @@
 package az.ecommerce.msproduct.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -16,8 +18,12 @@ public class FeedBack {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long feedId;
 
-    double rank;
+    @Min(value = 1)
+    @Max(value = 5)
+    double feedRank;
 
+    String feedComment;
+    String feedIcon;
     @ManyToOne
     Product product;
 
