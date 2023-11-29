@@ -1,5 +1,6 @@
 package az.ecommerce.msproduct.dto.response;
 
+import az.ecommerce.msproduct.entity.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -12,12 +13,12 @@ public class ProductResp {
     String productName;
     String description;
     String productIcons;
-    IsActiveResp isActive;
-    List<ColourResp> colourList;
-    PriceResp price;
-    DiscountResp discount;
-    List<FeedBackResp> feedBackList;
-    List<StoreResp> storeList;
+    IsActive isActive;
+    List<Colour> colourList;
+    Price price;
+    Discount discount;
+    List<FeedBack> feedBackList;
+    List<Store> storeList;
     LocalDateTime responseAt;
 
 

@@ -78,7 +78,7 @@ public class ProductImpl implements ProductInter {
         }
         log.info("GetAllProducts.service successed");
         return getAllProducts.stream()
-                .map(trainingE -> modelMapper.map(trainingE, ProductDto.class))
+                .map(products -> modelMapper.map(products, ProductDto.class))
                 .collect(Collectors.toList());
     }
 

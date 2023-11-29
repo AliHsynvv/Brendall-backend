@@ -1,9 +1,7 @@
 package az.ecommerce.msproduct.dto.request;
 
 import az.ecommerce.msproduct.entity.Product;
-import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.FieldDefaults;
 
 import java.util.ArrayList;
 import java.util.List;
