@@ -4,7 +4,6 @@ import az.ecommerce.msproduct.dto.request.CategoryDto;
 import az.ecommerce.msproduct.entity.Category;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
 import az.ecommerce.msproduct.exception.CategoryException;
-import az.ecommerce.msproduct.exception.ProductException;
 import az.ecommerce.msproduct.repository.CategoryRepo;
 import az.ecommerce.msproduct.service.inter.CategoryInter;
 import lombok.RequiredArgsConstructor;
@@ -82,6 +81,6 @@ public class CategoryImpl implements CategoryInter {
             return categoryRepo.save(newCategory);
         }
         log.info("Update.service successed");
-        throw new ProductException(ErrorCodeEnum.NOT_ENOUGH_COLOUR);
+        throw new CategoryException(ErrorCodeEnum.NOT_ENOUGH_CATEGORY);
     }
 }

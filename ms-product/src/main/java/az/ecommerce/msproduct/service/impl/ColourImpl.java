@@ -1,14 +1,9 @@
 package az.ecommerce.msproduct.service.impl;
 
 import az.ecommerce.msproduct.dto.request.ColourDto;
-import az.ecommerce.msproduct.dto.request.ProductDto;
-import az.ecommerce.msproduct.entity.Category;
 import az.ecommerce.msproduct.entity.Colour;
-import az.ecommerce.msproduct.entity.Product;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
-import az.ecommerce.msproduct.exception.CategoryException;
 import az.ecommerce.msproduct.exception.ColourException;
-import az.ecommerce.msproduct.exception.ProductException;
 import az.ecommerce.msproduct.repository.ColourRepo;
 import az.ecommerce.msproduct.service.inter.ColourInter;
 import lombok.RequiredArgsConstructor;

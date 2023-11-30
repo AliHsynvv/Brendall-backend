@@ -1,11 +1,8 @@
 package az.ecommerce.msproduct.service.impl;
 
-import az.ecommerce.msproduct.dto.request.ColourDto;
 import az.ecommerce.msproduct.dto.request.DiscountDto;
-import az.ecommerce.msproduct.entity.Colour;
 import az.ecommerce.msproduct.entity.Discount;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
-import az.ecommerce.msproduct.exception.ColourException;
 import az.ecommerce.msproduct.exception.DiscountException;
 import az.ecommerce.msproduct.repository.DiscountRepo;
 import az.ecommerce.msproduct.service.inter.DiscountInter;

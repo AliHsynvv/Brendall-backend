@@ -1,5 +1,6 @@
 package az.ecommerce.msproduct.dto.request;
 
+import az.ecommerce.msproduct.entity.Product;
 import lombok.*;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public class StoreDto {
     String storeName;
     String storeIcon;
     String storeLocation;
-    List<ProductDto> productList;
+    List<Product> productList;
 
 
 

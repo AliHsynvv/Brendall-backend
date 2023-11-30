@@ -1,18 +1,13 @@
 package az.ecommerce.msproduct.service.impl;
 
-import az.ecommerce.msproduct.dto.request.ColourDto;
 import az.ecommerce.msproduct.dto.request.GenderDto;
-import az.ecommerce.msproduct.entity.Colour;
-import az.ecommerce.msproduct.entity.Discount;
 import az.ecommerce.msproduct.entity.Gender;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
-import az.ecommerce.msproduct.exception.ColourException;
 import az.ecommerce.msproduct.exception.GenderException;
 import az.ecommerce.msproduct.repository.GenderRepo;
 import az.ecommerce.msproduct.service.inter.GenderInter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.weaver.reflect.GenericSignatureInformationProvider;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -88,6 +83,6 @@ public class GenderImpl implements GenderInter {
             return genderRepo.save(newGender);
         }
         log.info("Update.service successed");
-        throw new ColourException(ErrorCodeEnum.NOT_ENOUGH_COLOUR);
+        throw new GenderException(ErrorCodeEnum.NOT_ENOUGH_GENDER);
     }
 }
