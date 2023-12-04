@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +28,6 @@ public class CategoryImpl implements CategoryInter {
         log.info("Create.service started");
         Category category = Category.builder()
                 .name(categoryDto.getName())
-                .products(categoryDto.getProducts())
                 .build();
         categoryRepo.save(category);
         log.info("Created.service successed");
@@ -58,6 +58,7 @@ public class CategoryImpl implements CategoryInter {
     }
 
     @Override
+    @Transactional
     public void delete(long id) {
         log.info("Delete.service started");
         Optional<Category> deleteC = categoryRepo.findById(id);
@@ -70,13 +71,13 @@ public class CategoryImpl implements CategoryInter {
     }
 
     @Override
+    @Transactional
     public Category update(CategoryDto categoryDto, long id) {
         log.info("Update.service started");
         Optional<Category> updateC = categoryRepo.findById(id);
         if (updateC.isPresent()) {
             Category newCategory = updateC.get();
             newCategory.setName(categoryDto.getName());
-            newCategory.setProducts(categoryDto.getProducts());
 
             return categoryRepo.save(newCategory);
         }

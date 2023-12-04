@@ -24,11 +24,8 @@ public class Product {
     String productName;
     @NotBlank(message = "description cannot be empty")
     String description;
-    String productIcons;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "pia_fk")
-    IsActive isActive;
+    boolean isActivated;
+    boolean isDeleted;
 
     @OneToMany(targetEntity = Colour.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "pc_fk",referencedColumnName = "productId")

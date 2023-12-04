@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +29,6 @@ public class SizeImpl implements SizeInter {
         log.info("Create.service started");
         Size size = Size.builder()
                 .sizeName(sizeDto.getSizeName())
-                .product(sizeDto.getProduct())
                 .build();
              sizeRepo.save(size);
         log.info("Created.service successed");
@@ -59,6 +59,7 @@ public class SizeImpl implements SizeInter {
     }
 
     @Override
+    @Transactional
     public void delete(long id) {
         log.info("Delete.service started");
         Optional<Size> deleteS = sizeRepo.findById(id);
@@ -71,13 +72,13 @@ public class SizeImpl implements SizeInter {
     }
 
     @Override
+    @Transactional
     public Size update(SizeDto sizeDto, long id) {
         log.info("Update service started");
         Optional<Size> updateS = sizeRepo.findById(id);
         if (updateS.isPresent()) {
             Size newSize = updateS.get();
             newSize.setSizeName(sizeDto.getSizeName());
-            newSize.setProduct(sizeDto.getProduct());
 
             return sizeRepo.save(newSize);
         }

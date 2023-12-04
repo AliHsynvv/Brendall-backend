@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +30,6 @@ public class GenderImpl implements GenderInter {
         log.info("Create.service started");
         Gender gender = Gender.builder()
                 .name(genderDto.getName())
-                .products(genderDto.getProducts())
                 .build();
         genderRepo.save(gender);
         log.info("Created.service successed");
@@ -60,6 +60,7 @@ public class GenderImpl implements GenderInter {
     }
 
     @Override
+    @Transactional
     public void delete(long id) {
         log.info("Delete.service started");
         Optional<Gender> deleteG = genderRepo.findById(id);
@@ -72,13 +73,13 @@ public class GenderImpl implements GenderInter {
     }
 
     @Override
+    @Transactional
     public Gender update(GenderDto genderDto, long id) {
         log.info("Update.service started");
         Optional<Gender> updateG = genderRepo.findById(id);
         if (updateG.isPresent()) {
             Gender newGender = updateG.get();
             newGender.setName(genderDto.getName());
-            newGender.setProducts(genderDto.getProducts());
 
             return genderRepo.save(newGender);
         }

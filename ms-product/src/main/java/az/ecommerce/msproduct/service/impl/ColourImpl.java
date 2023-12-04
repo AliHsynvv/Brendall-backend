@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +27,6 @@ public class ColourImpl implements ColourInter {
         log.info("Create.service started");
         Colour colour = Colour.builder()
                 .colourName(colourDto.getColourName())
-                .products(colourDto.getProducts())
                 .build();
         colourRepo.save(colour);
         log.info("Created.service successed");
@@ -57,6 +57,7 @@ public class ColourImpl implements ColourInter {
     }
 
     @Override
+    @Transactional
     public void delete(long id) {
         log.info("Delete.service started");
         Optional<Colour> deleteC = colourRepo.findById(id);
@@ -69,13 +70,13 @@ public class ColourImpl implements ColourInter {
     }
 
     @Override
+    @Transactional
     public Colour update(ColourDto colourDto, long id) {
         log.info("Update.service started");
         Optional<Colour> updateC = colourRepo.findById(id);
         if (updateC.isPresent()) {
             Colour newColour = updateC.get();
             newColour.setColourName(colourDto.getColourName());
-            newColour.setProducts(colourDto.getProducts());
 
             return colourRepo.save(newColour);
         }

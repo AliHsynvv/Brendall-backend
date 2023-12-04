@@ -13,7 +13,7 @@ public class GenderDto {
     private Long id;
     private String name;
 
-    private List<Product> products;
+    long productId;
 
 }
 

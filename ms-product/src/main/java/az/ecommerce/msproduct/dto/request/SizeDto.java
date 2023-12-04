@@ -8,7 +8,7 @@ public class SizeDto {
 
     long sizeId;
     String sizeName;
-    Product product;
+    long productId;
 
 
 }

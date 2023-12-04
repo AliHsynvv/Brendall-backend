@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,7 +45,6 @@ public class StoreImpl implements StoreInter {
                     .storeName(storeDto.getStoreName())
                     .storeIcon(Base64.getEncoder().encodeToString(multipartFile.getBytes()))
                     .storeLocation(storeDto.getStoreLocation())
-                    .productList(storeDto.getProductList())
                     .build();
         } catch (IOException e) {
             throw  new StoreException(ErrorCodeEnum.UNKNOWN_ERROR);
@@ -76,6 +76,7 @@ public class StoreImpl implements StoreInter {
     }
 
     @Override
+    @Transactional
     public void delete(long id) {
         log.info("Delete.service started");
         Optional<Store> deleteSt = storeRepo.findById(id);
@@ -88,6 +89,7 @@ public class StoreImpl implements StoreInter {
     }
 
     @Override
+    @Transactional
     public Store update(StoreDto storeDto, long id) {
         log.info("Update.service started");
         Optional <Store> updateSt = storeRepo.findById(id);
@@ -96,7 +98,6 @@ public class StoreImpl implements StoreInter {
             newStore.setStoreName(storeDto.getStoreName());
             newStore.setStoreIcon(storeDto.getStoreIcon());
             newStore.setStoreLocation(storeDto.getStoreLocation());
-            newStore.setProductList(storeDto.getProductList());
 
             return storeRepo.save(newStore);
         }

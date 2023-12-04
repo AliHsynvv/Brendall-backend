@@ -13,12 +13,13 @@ public class ProductResp {
     String productName;
     String description;
     String productIcons;
-    IsActive isActive;
-    List<Colour> colourList;
-    Price price;
-    Discount discount;
-    List<FeedBack> feedBackList;
-    List<Store> storeList;
+    boolean isActivated;
+    boolean isDeleted;
+    long colourId;
+    long  priceId;
+    long discountId;
+    long feedId;
+    long storeId;
     LocalDateTime responseAt;
 
 

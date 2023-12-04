@@ -9,7 +9,7 @@ public class FeedBackDto {
     double feedRank;
     String feedIcon;
     String feedComment;
-    ProductDto product;
+    long productId;
 
 
 }

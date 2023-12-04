@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,31 +29,17 @@ public class ProductImpl implements ProductInter {
     private final ModelMapper modelMapper;
 
     @Override
-    public void create(MultipartFile multipartFile, ProductDto productDto) {
+    public void create(ProductDto productDto) {
         log.info("Create.service started");
-        Product product;
 
-        String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
-        if (fileName.contains("..")){
-            throw new ProductException(ErrorCodeEnum.INVALID_FILE);
-        }
-        try {
-            product = Product.builder()
-                    .productIcons(Base64.getEncoder().encodeToString(multipartFile.getBytes()))
-                    .description(productDto.getDescription())
-                    .productName(productDto.getProductName())
-                    .isActive(productDto.getIsActive())
-                    .colourList(productDto.getColourList())
-                    .price(productDto.getPrice())
-                    .discount(productDto.getDiscount())
-                    .feedBackList(productDto.getFeedBackList())
-                    .storeList(productDto.getStoreList())
-                    .gender(productDto.getGender())
-                    .category(productDto.getCategory())
-                    .build();
-        } catch (IOException e) {
-            throw new ProductException(ErrorCodeEnum.UNKNOWN_ERROR);
-        }
+        Product product = Product.builder()
+                .description(productDto.getDescription())
+                .productName(productDto.getProductName())
+                .isActivated(productDto.isActivated())
+                .isDeleted(productDto.isDeleted())
+                .build();
+
+
         productRepo.save(product);
         log.info("Created.service successed");
     }
@@ -83,6 +70,7 @@ public class ProductImpl implements ProductInter {
     }
 
     @Override
+    @Transactional
     public void delete(long id) {
         log.info("Delete.service started");
         Optional<Product> deleteP = productRepo.findById(id);
@@ -95,23 +83,16 @@ public class ProductImpl implements ProductInter {
     }
 
     @Override
+    @Transactional
     public Product update(ProductDto productDto, long id) {
         log.info("Update.service started");
         Optional<Product> updateP = productRepo.findById(id);
         if (updateP.isPresent()) {
             Product newProduct = updateP.get();
 
-            newProduct.setProductIcons(productDto.getProductIcons());
             newProduct.setDescription(productDto.getDescription());
             newProduct.setProductName(productDto.getProductName());
-            newProduct.setIsActive(productDto.getIsActive());
-            newProduct.setColourList(productDto.getColourList());
-            newProduct.setPrice(productDto.getPrice());
-            newProduct.setDiscount(productDto.getDiscount());
-            newProduct.setFeedBackList(productDto.getFeedBackList());
-            newProduct.setStoreList(productDto.getStoreList());
-            newProduct.setGender(productDto.getGender());
-            newProduct.setCategory(productDto.getCategory());
+
 
             return productRepo.save(newProduct);
         }

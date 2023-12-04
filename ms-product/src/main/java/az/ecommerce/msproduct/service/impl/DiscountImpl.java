@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +31,6 @@ public class DiscountImpl implements DiscountInter {
                 .percentage(discountDto.getPercentage())
                 .startDate(discountDto.getStartDate())
                 .endDate(discountDto.getEndDate())
-                .products(discountDto.getProducts())
                 .build();
         discountRepo.save(discount);
         log.info("Created.service successed");
@@ -61,6 +61,7 @@ public class DiscountImpl implements DiscountInter {
     }
 
     @Override
+    @Transactional
     public void delete(long id) {
         log.info("Delete.service started");
         Optional<Discount> deleteD = discountRepo.findById(id);
@@ -73,6 +74,7 @@ public class DiscountImpl implements DiscountInter {
     }
 
     @Override
+    @Transactional
     public Discount update(DiscountDto discountDto, long id) {
         log.info("Update.service started");
         Optional<Discount> updateD = discountRepo.findById(id);
@@ -81,7 +83,6 @@ public class DiscountImpl implements DiscountInter {
             newDiscount.setPercentage(discountDto.getPercentage());
             newDiscount.setStartDate(discountDto.getStartDate());
             newDiscount.setEndDate(discountDto.getEndDate());
-            newDiscount.setProducts(discountDto.getProducts());
 
             return discountRepo.save(newDiscount);
         }

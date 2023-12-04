@@ -13,5 +13,5 @@ public class DiscountDto {
     BigDecimal percentage;
     LocalDateTime startDate;
     LocalDateTime endDate;
-    Product products;
+    long productId;
 }

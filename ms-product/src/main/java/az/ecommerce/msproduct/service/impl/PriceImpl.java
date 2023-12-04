@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +32,6 @@ public class PriceImpl implements PriceInter {
                 .amount(priceDto.getAmount())
                 .startDate(priceDto.getStartDate())
                 .endDate(priceDto.getEndDate())
-                .products(priceDto.getProducts())
                 .build();
 
         priceRepo.save(price);
@@ -78,6 +78,7 @@ public class PriceImpl implements PriceInter {
     }
 
     @Override
+    @Transactional
     public Price update(PriceDto priceDto, long id) {
         log.info("Update.service started");
        Optional<Price> updateP = priceRepo.findById(id);
@@ -86,7 +87,6 @@ public class PriceImpl implements PriceInter {
            newPrice.setAmount(priceDto.getAmount());
            newPrice.setStartDate(priceDto.getStartDate());
            newPrice.setEndDate(priceDto.getEndDate());
-           newPrice.setProducts(priceDto.getProducts());
            return priceRepo.save(newPrice);
        }
         log.info("Update.service successed");

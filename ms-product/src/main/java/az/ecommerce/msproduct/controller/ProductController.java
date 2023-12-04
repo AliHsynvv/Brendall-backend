@@ -17,8 +17,8 @@ public class ProductController {
     private final ProductInter productInter;
 
     @PostMapping("/create")
-    public void create(@RequestParam MultipartFile file, @RequestBody ProductDto productDto){
-        productInter.create(file,productDto);
+    public void create(@RequestBody ProductDto productDto){
+        productInter.create(productDto);
     }
 
     @GetMapping("/findproduct/{id}")
