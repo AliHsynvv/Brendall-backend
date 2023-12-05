@@ -7,8 +7,6 @@ public class FeedBackDto {
 
     long feedId;
     double feedRank;
-    String feedIcon;
-    String feedComment;
     long productId;
 
 

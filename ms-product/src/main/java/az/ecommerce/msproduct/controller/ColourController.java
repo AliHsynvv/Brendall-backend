@@ -13,6 +13,7 @@ import java.util.List;
 @RequestMapping("/colour")
 @RequiredArgsConstructor
 public class ColourController {
+
     private final ColourInter colourInter;
 
     @PostMapping("/create")

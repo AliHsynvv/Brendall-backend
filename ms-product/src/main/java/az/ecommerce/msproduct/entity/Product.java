@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -58,6 +57,13 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "storeId"))
     List<Store> storeList;
 
+    @ManyToOne
+    @JoinColumn(name = "file_id")
+    private FileData fileData;
+
+    @ManyToOne
+    @JoinColumn(name = "image_id")
+    private ImageData imageData;
 
 
 
