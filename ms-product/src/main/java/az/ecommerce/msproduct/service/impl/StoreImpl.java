@@ -1,9 +1,10 @@
 package az.ecommerce.msproduct.service.impl;
 
+import az.ecommerce.msproduct.dto.request.SizeDto;
 import az.ecommerce.msproduct.dto.request.StoreDto;
+import az.ecommerce.msproduct.entity.Size;
 import az.ecommerce.msproduct.entity.Store;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
-import az.ecommerce.msproduct.exception.ProductException;
 import az.ecommerce.msproduct.exception.SizeException;
 import az.ecommerce.msproduct.exception.StoreException;
 import az.ecommerce.msproduct.repository.StoreRepo;
@@ -32,23 +33,14 @@ public class StoreImpl implements StoreInter {
     private final ModelMapper modelMapper;
 
     @Override
-    public void create(MultipartFile multipartFile, StoreDto storeDto) {
+    public void create(StoreDto storeDto) {
         log.info("Create.service started");
-        Store store;
+        Store store = Store.builder()
+                .storeName(storeDto.getStoreName())
+                .storeIcon(storeDto.getStoreIcon())
+                .storeLocation(storeDto.getStoreLocation())
+                .build();
 
-        String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
-        if (fileName.contains("..")){
-            throw new StoreException(ErrorCodeEnum.INVALID_FILE);
-        }
-        try {
-            store = Store.builder()
-                    .storeName(storeDto.getStoreName())
-                    .storeIcon(Base64.getEncoder().encodeToString(multipartFile.getBytes()))
-                    .storeLocation(storeDto.getStoreLocation())
-                    .build();
-        } catch (IOException e) {
-            throw  new StoreException(ErrorCodeEnum.UNKNOWN_ERROR);
-        }
         storeRepo.save(store);
         log.info("Created.service successed");
     }
@@ -61,18 +53,20 @@ public class StoreImpl implements StoreInter {
             throw new StoreException(ErrorCodeEnum.STORE_NOT_FOUND);
         }
         log.info("FindById.service successed");
-        return findSt.map(findStore-> modelMapper.map(findStore, StoreDto.class)).orElseThrow();
+        return findSt.map(findStore -> modelMapper.map(findStore, StoreDto.class)).orElseThrow();
     }
 
     @Override
     public List<StoreDto> getAllStores() {
-        log.info("GetAllCategories.service started");
+        log.info("GetAllStores.service started");
         List<Store> getAllStore = storeRepo.findAll();
-        if (getAllStore.isEmpty()){
+        if (getAllStore.isEmpty()) {
             throw new StoreException(ErrorCodeEnum.UNKNOWN_ERROR);
         }
         log.info("GetAllStores.service successed");
-        return getAllStores().stream().map(store-> modelMapper.map(store, StoreDto.class)).collect(Collectors.toList());
+        return getAllStore.stream()
+                .map(stores -> modelMapper.map(stores, StoreDto.class))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -80,7 +74,7 @@ public class StoreImpl implements StoreInter {
     public void delete(long id) {
         log.info("Delete.service started");
         Optional<Store> deleteSt = storeRepo.findById(id);
-        if (deleteSt.isEmpty()){
+        if (deleteSt.isEmpty()) {
             throw new SizeException(ErrorCodeEnum.STORE_NOT_FOUND);
         } else {
             storeRepo.deleteById(id);
@@ -92,8 +86,8 @@ public class StoreImpl implements StoreInter {
     @Transactional
     public Store update(StoreDto storeDto, long id) {
         log.info("Update.service started");
-        Optional <Store> updateSt = storeRepo.findById(id);
-        if (updateSt.isPresent()){
+        Optional<Store> updateSt = storeRepo.findById(id);
+        if (updateSt.isPresent()) {
             Store newStore = updateSt.get();
             newStore.setStoreName(storeDto.getStoreName());
             newStore.setStoreIcon(storeDto.getStoreIcon());

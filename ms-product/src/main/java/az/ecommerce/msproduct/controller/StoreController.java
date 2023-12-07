@@ -20,8 +20,8 @@ public class StoreController {
     private final StoreInter storeInter;
 
     @PostMapping("/create")
-    public void create(@RequestParam MultipartFile file, @RequestBody StoreDto storeDto) {
-        storeInter.create(file, storeDto);
+    public void create( @RequestBody StoreDto storeDto) {
+        storeInter.create(storeDto);
     }
 
     @GetMapping("/findstore/{id}")

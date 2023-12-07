@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public interface StoreInter {
-    void create(MultipartFile multipartFile, StoreDto storeDto);
+    void create( StoreDto storeDto);
     StoreDto findById(long id);
     List<StoreDto> getAllStores();
     void delete(long id);

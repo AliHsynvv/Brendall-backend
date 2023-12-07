@@ -31,7 +31,7 @@ public class Product {
     List<Colour> colourList;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "pp_fk", nullable = false)
+    @JoinColumn(name = "pp_fk")
     Price price;
 
     @OneToOne(cascade = CascadeType.ALL)

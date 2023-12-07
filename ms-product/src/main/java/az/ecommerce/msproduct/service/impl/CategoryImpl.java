@@ -1,9 +1,12 @@
 package az.ecommerce.msproduct.service.impl;
 
 import az.ecommerce.msproduct.dto.request.CategoryDto;
+import az.ecommerce.msproduct.dto.request.ProductDto;
 import az.ecommerce.msproduct.entity.Category;
+import az.ecommerce.msproduct.entity.Product;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
 import az.ecommerce.msproduct.exception.CategoryException;
+import az.ecommerce.msproduct.exception.ProductException;
 import az.ecommerce.msproduct.repository.CategoryRepo;
 import az.ecommerce.msproduct.service.inter.CategoryInter;
 import lombok.RequiredArgsConstructor;
@@ -46,13 +49,14 @@ public class CategoryImpl implements CategoryInter {
 
     @Override
     public List<CategoryDto> getAllCategories() {
-        log.info("GetAllCategories.service started");
+        log.info("GetAllCategory.service started");
+
         List<Category> getAllCategories = categoryRepo.findAll();
         if (getAllCategories.isEmpty()) {
             throw new CategoryException(ErrorCodeEnum.UNKNOWN_ERROR);
         }
-        log.info("GetAllCategories.service successed");
-        return getAllCategories().stream()
+        log.info("GetAllCategory.service successed");
+        return getAllCategories.stream()
                 .map(categories -> modelMapper.map(categories, CategoryDto.class))
                 .collect(Collectors.toList());
     }
