@@ -2,9 +2,11 @@ package az.ecommerce.msproduct.service.impl;
 
 import az.ecommerce.msproduct.dto.request.DiscountDto;
 import az.ecommerce.msproduct.entity.Discount;
+import az.ecommerce.msproduct.entity.Product;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
 import az.ecommerce.msproduct.exception.DiscountException;
 import az.ecommerce.msproduct.repository.DiscountRepo;
+import az.ecommerce.msproduct.repository.ProductRepo;
 import az.ecommerce.msproduct.service.inter.DiscountInter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,17 +22,23 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class DiscountImpl implements DiscountInter {
-
+    private final ProductRepo productRepo;
     private final DiscountRepo discountRepo;
     private final ModelMapper modelMapper;
 
     @Override
     public void create(DiscountDto discountDto) {
         log.info("Create.service started");
+
+        Optional<Product> existingProduct = productRepo.findById(discountDto.getProductId());
+        Product product = existingProduct.orElseThrow(() ->
+                new IllegalArgumentException("Product not found for ID: " + discountDto.getProductId()));
+
         Discount discount = Discount.builder()
                 .percentage(discountDto.getPercentage())
                 .startDate(discountDto.getStartDate())
                 .endDate(discountDto.getEndDate())
+                .product(product)
                 .build();
         discountRepo.save(discount);
         log.info("Created.service success");

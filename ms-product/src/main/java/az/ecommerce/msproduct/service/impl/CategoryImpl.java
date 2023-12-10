@@ -1,13 +1,13 @@
 package az.ecommerce.msproduct.service.impl;
 
 import az.ecommerce.msproduct.dto.request.CategoryDto;
-import az.ecommerce.msproduct.dto.request.ProductDto;
 import az.ecommerce.msproduct.entity.Category;
+import az.ecommerce.msproduct.entity.Colour;
 import az.ecommerce.msproduct.entity.Product;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
 import az.ecommerce.msproduct.exception.CategoryException;
-import az.ecommerce.msproduct.exception.ProductException;
 import az.ecommerce.msproduct.repository.CategoryRepo;
+import az.ecommerce.msproduct.repository.ProductRepo;
 import az.ecommerce.msproduct.service.inter.CategoryInter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,14 +23,17 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class CategoryImpl implements CategoryInter {
+    private final ProductRepo productRepo;
     private final CategoryRepo categoryRepo;
     private final ModelMapper modelMapper;
 
     @Override
     public void create(CategoryDto categoryDto) {
         log.info("Create.service started");
+        List<Product> productList = productRepo.findAllById(categoryDto.getProductIds());
         Category category = Category.builder()
                 .name(categoryDto.getName())
+                .productList(productList)
                 .build();
         categoryRepo.save(category);
         log.info("Created.service success");

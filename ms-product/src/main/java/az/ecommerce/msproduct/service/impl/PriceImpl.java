@@ -2,9 +2,11 @@ package az.ecommerce.msproduct.service.impl;
 
 import az.ecommerce.msproduct.dto.request.PriceDto;
 import az.ecommerce.msproduct.entity.Price;
+import az.ecommerce.msproduct.entity.Product;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
 import az.ecommerce.msproduct.exception.PriceException;
 import az.ecommerce.msproduct.repository.PriceRepo;
+import az.ecommerce.msproduct.repository.ProductRepo;
 import az.ecommerce.msproduct.service.inter.PriceInter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +22,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class PriceImpl implements PriceInter {
-
+    private final ProductRepo productRepo;
     private final PriceRepo priceRepo;
     private final ModelMapper modelMapper;
 
@@ -28,10 +30,16 @@ public class PriceImpl implements PriceInter {
     public void create(PriceDto priceDto) {
 
         log.info("Create.service started");
+
+        Optional<Product> existingProduct = productRepo.findById(priceDto.getProductId());
+        Product product = existingProduct.orElseThrow(() ->
+                new IllegalArgumentException("Product not found for ID: " + priceDto.getProductId()));
+
         Price price = Price.builder()
                 .amount(priceDto.getAmount())
                 .startDate(priceDto.getStartDate())
                 .endDate(priceDto.getEndDate())
+                .product(product)
                 .build();
 
         priceRepo.save(price);

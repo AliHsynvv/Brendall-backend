@@ -2,9 +2,11 @@ package az.ecommerce.msproduct.service.impl;
 
 import az.ecommerce.msproduct.dto.request.FeedBackDto;
 import az.ecommerce.msproduct.entity.FeedBack;
+import az.ecommerce.msproduct.entity.Product;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
 import az.ecommerce.msproduct.exception.FeedBackException;
 import az.ecommerce.msproduct.repository.FeedBackRepo;
+import az.ecommerce.msproduct.repository.ProductRepo;
 import az.ecommerce.msproduct.service.inter.FeedBackInter;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -20,14 +22,20 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class FeedBackImpl implements FeedBackInter {
-
+    private final ProductRepo productRepo;
     private final FeedBackRepo feedBackRepo;
     private final ModelMapper modelMapper;
     @Override
     public void create(FeedBackDto feedBackDto) {
         log.info("Create.service started");
+
+        Optional<Product> existingProduct = productRepo.findById(feedBackDto.getProductId());
+        Product product = existingProduct.orElseThrow(() ->
+                new IllegalArgumentException("Product not found for ID: " + feedBackDto.getProductId()));
+
         FeedBack feedBack = FeedBack.builder()
                 .feedRank(feedBackDto.getFeedRank())
+                .product(product)
                 .build();
         feedBackRepo.save(feedBack);
         log.info("Created.service success");

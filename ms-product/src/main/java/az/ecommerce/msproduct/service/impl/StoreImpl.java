@@ -1,12 +1,12 @@
 package az.ecommerce.msproduct.service.impl;
 
-import az.ecommerce.msproduct.dto.request.SizeDto;
 import az.ecommerce.msproduct.dto.request.StoreDto;
-import az.ecommerce.msproduct.entity.Size;
+import az.ecommerce.msproduct.entity.Product;
 import az.ecommerce.msproduct.entity.Store;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
 import az.ecommerce.msproduct.exception.SizeException;
 import az.ecommerce.msproduct.exception.StoreException;
+import az.ecommerce.msproduct.repository.ProductRepo;
 import az.ecommerce.msproduct.repository.StoreRepo;
 import az.ecommerce.msproduct.service.inter.StoreInter;
 import lombok.RequiredArgsConstructor;
@@ -14,13 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.Base64;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -28,17 +23,19 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class StoreImpl implements StoreInter {
-
+    private final ProductRepo productRepo;
     private final StoreRepo storeRepo;
     private final ModelMapper modelMapper;
 
     @Override
     public void create(StoreDto storeDto) {
         log.info("Create.service started");
+        List<Product> productList = productRepo.findAllById(storeDto.getProductIds());
         Store store = Store.builder()
                 .storeName(storeDto.getStoreName())
                 .storeIcon(storeDto.getStoreIcon())
                 .storeLocation(storeDto.getStoreLocation())
+                .productList(productList)
                 .build();
 
         storeRepo.save(store);

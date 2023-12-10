@@ -1,9 +1,11 @@
 package az.ecommerce.msproduct.service.impl;
 
 import az.ecommerce.msproduct.dto.request.SizeDto;
+import az.ecommerce.msproduct.entity.Product;
 import az.ecommerce.msproduct.entity.Size;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
 import az.ecommerce.msproduct.exception.SizeException;
+import az.ecommerce.msproduct.repository.ProductRepo;
 import az.ecommerce.msproduct.repository.SizeRepo;
 import az.ecommerce.msproduct.service.inter.SizeInter;
 import lombok.RequiredArgsConstructor;
@@ -20,15 +22,21 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class SizeImpl implements SizeInter {
-
+    private final ProductRepo productRepo;
     private final SizeRepo sizeRepo;
     private final ModelMapper modelMapper;
 
     @Override
     public void create(SizeDto sizeDto) {
         log.info("Create.service started");
+
+        Optional<Product> existingProduct = productRepo.findById(sizeDto.getProductId());
+        Product product = existingProduct.orElseThrow(() ->
+                new IllegalArgumentException("Product not found for ID: " + sizeDto.getProductId()));
+
         Size size = Size.builder()
                 .sizeName(sizeDto.getSizeName())
+                .product(product)
                 .build();
              sizeRepo.save(size);
         log.info("Created.service success");

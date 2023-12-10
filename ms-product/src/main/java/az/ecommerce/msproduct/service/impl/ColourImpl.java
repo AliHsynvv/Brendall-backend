@@ -1,10 +1,13 @@
 package az.ecommerce.msproduct.service.impl;
 
 import az.ecommerce.msproduct.dto.request.ColourDto;
+import az.ecommerce.msproduct.entity.Category;
 import az.ecommerce.msproduct.entity.Colour;
+import az.ecommerce.msproduct.entity.Product;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
 import az.ecommerce.msproduct.exception.ColourException;
 import az.ecommerce.msproduct.repository.ColourRepo;
+import az.ecommerce.msproduct.repository.ProductRepo;
 import az.ecommerce.msproduct.service.inter.ColourInter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,13 +23,20 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class ColourImpl implements ColourInter {
+    private final ProductRepo productRepo;
     private final ColourRepo colourRepo;
     private final ModelMapper modelMapper;
     @Override
     public void create(ColourDto colourDto) {
         log.info("Create.service started");
+
+        Optional<Product> existingProduct = productRepo.findById(colourDto.getProductId());
+        Product product = existingProduct.orElseThrow(() ->
+                new IllegalArgumentException("Product not found for ID: " + colourDto.getProductId()));
+
         Colour colour = Colour.builder()
                 .colourName(colourDto.getColourName())
+                .product(product)
                 .build();
         colourRepo.save(colour);
         log.info("Created.service success");

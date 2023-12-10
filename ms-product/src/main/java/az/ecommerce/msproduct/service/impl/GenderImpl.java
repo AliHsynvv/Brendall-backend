@@ -2,9 +2,11 @@ package az.ecommerce.msproduct.service.impl;
 
 import az.ecommerce.msproduct.dto.request.GenderDto;
 import az.ecommerce.msproduct.entity.Gender;
+import az.ecommerce.msproduct.entity.Product;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
 import az.ecommerce.msproduct.exception.GenderException;
 import az.ecommerce.msproduct.repository.GenderRepo;
+import az.ecommerce.msproduct.repository.ProductRepo;
 import az.ecommerce.msproduct.service.inter.GenderInter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +22,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class GenderImpl implements GenderInter {
-
+    private final ProductRepo productRepo;
     private final GenderRepo genderRepo;
     private final ModelMapper modelMapper;
 
@@ -28,8 +30,10 @@ public class GenderImpl implements GenderInter {
     @Override
     public void create(GenderDto genderDto) {
         log.info("Create.service started");
+        List<Product> productList = productRepo.findAllById(genderDto.getProductIds());
         Gender gender = Gender.builder()
                 .name(genderDto.getName())
+                .productList(productList)
                 .build();
         genderRepo.save(gender);
         log.info("Created.service success");
