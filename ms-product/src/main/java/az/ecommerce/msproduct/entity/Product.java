@@ -44,11 +44,15 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "gender_id")
-    private Gender gender;
+    Gender gender;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
-    private Category category;
+    Category category;
+
+    @OneToMany(targetEntity = Size.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "psize_fk",referencedColumnName = "productId")
+    List<Size> sizeList;
 
     @ManyToMany
     @JoinTable(
@@ -57,13 +61,13 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "storeId"))
     List<Store> storeList;
 
-    @ManyToOne
-    @JoinColumn(name = "file_id")
-    private FileData fileData;
+    @OneToMany(targetEntity = FileData.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "pfile_fk",referencedColumnName = "productId")
+    List<FileData> fileData;
 
-    @ManyToOne
-    @JoinColumn(name = "image_id")
-    private ImageData imageData;
+    @OneToMany(targetEntity = ImageData.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "pi_fk",referencedColumnName = "productId")
+    List<ImageData> imageDataList;
 
 
 

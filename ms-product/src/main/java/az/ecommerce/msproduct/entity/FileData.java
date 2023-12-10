@@ -1,10 +1,10 @@
 package az.ecommerce.msproduct.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+import java.util.logging.Level;
 
 @Entity
 @Table(name = "FILE_DATA")
@@ -12,13 +12,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class FileData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    long id;
 
-    private String name;
-    private String type;
-    private String filePath;
+    String name;
+    String type;
+    String filePath;
+    @ManyToOne
+    Product product;
+
 }

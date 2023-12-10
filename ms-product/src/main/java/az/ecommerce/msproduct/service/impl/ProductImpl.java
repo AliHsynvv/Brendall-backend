@@ -1,16 +1,10 @@
 package az.ecommerce.msproduct.service.impl;
 
-import az.ecommerce.msproduct.dto.request.CategoryDto;
 import az.ecommerce.msproduct.dto.request.ProductDto;
-import az.ecommerce.msproduct.entity.Category;
-import az.ecommerce.msproduct.entity.Price;
-import az.ecommerce.msproduct.entity.Product;
+import az.ecommerce.msproduct.entity.*;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
-import az.ecommerce.msproduct.exception.CategoryException;
 import az.ecommerce.msproduct.exception.ProductException;
-import az.ecommerce.msproduct.repository.CategoryRepo;
-import az.ecommerce.msproduct.repository.PriceRepo;
-import az.ecommerce.msproduct.repository.ProductRepo;
+import az.ecommerce.msproduct.repository.*;
 import az.ecommerce.msproduct.service.inter.ProductInter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,25 +22,64 @@ import java.util.stream.Collectors;
 public class ProductImpl implements ProductInter {
     private final ProductRepo productRepo;
     private final ModelMapper modelMapper;
+    private final CategoryRepo categoryRepo;
+    private final ColourRepo colourRepo;
+    private final DiscountRepo discountRepo;
+    private final FeedBackRepo feedBackRepo;
+    private final FileDataRepo fileDataRepo;
+    private final GenderRepo genderRepo;
+    private final ImageRepo imageRepo;
     private final PriceRepo priceRepo;
+    private final SizeRepo sizeRepo;
+    private final StoreRepo storeRepo;
 
     @Override
     public void create(ProductDto productDto) {
         log.info("Create.service started");
 
+        Optional<Category> existingCategory = categoryRepo.findById(productDto.getCategoryId());
+        Category category = existingCategory.orElseThrow(() ->
+                new IllegalArgumentException("Category not found for ID: " + productDto.getCategoryId()));
+
+        List<Colour> colourList = colourRepo.findAllById(productDto.getColourIds());
+
+        Optional<Discount> existingDiscount = discountRepo.findById(productDto.getDiscountId());
+        Discount discount = existingDiscount.orElseThrow(() ->
+                new IllegalArgumentException("Discount not found for ID: " + productDto.getDiscountId()));
+
         Optional<Price> existingPrice = priceRepo.findById(productDto.getPriceId());
         Price price = existingPrice.orElseThrow(() ->
                 new IllegalArgumentException("Price not found for ID: " + productDto.getPriceId()));
+
+        Optional<Gender> existingGender = genderRepo.findById(productDto.getGenderId());
+        Gender gender = existingGender.orElseThrow(() ->
+                new IllegalArgumentException("Gender not found for ID: " + productDto.getGenderId()));
+
+        List<FeedBack> feedBackList = feedBackRepo.findAllById(productDto.getFeedIds());
+        List<FileData> fileList = fileDataRepo.findAllById(productDto.getFileIds());
+        List<ImageData> imageDataList = imageRepo.findAllById(productDto.getImageIds());
+        List<Size> sizeList = sizeRepo.findAllById(productDto.getSizeIds());
+        List<Store> storeList = storeRepo.findAllById(productDto.getStoreIds());
+
         Product product = Product.builder()
                 .productName(productDto.getProductName())
                 .description(productDto.getDescription())
                 .isActivated(true)
                 .isDeleted(false)
+                .category(category)
+                .colourList(colourList)
+                .discount(discount)
+                .feedBackList(feedBackList)
+                .fileData(fileList)
+                .gender(gender)
+                .imageDataList(imageDataList)
                 .price(price)
+                .sizeList(sizeList)
+                .storeList(storeList)
                 .build();
 
         productRepo.save(product);
-        log.info("Created.service successed");
+        log.info("Created.service success");
 
     }
 
@@ -57,7 +90,7 @@ public class ProductImpl implements ProductInter {
         if (findP.isEmpty()) {
             throw new ProductException(ErrorCodeEnum.PRODUCT_NOT_FOUND);
         }
-        log.info("FindById.service successed");
+        log.info("FindById.service success");
         return findP.map(productE -> modelMapper.map(productE, ProductDto.class)).orElseThrow();
 
     }
@@ -69,7 +102,7 @@ public class ProductImpl implements ProductInter {
         if (getAllProducts.isEmpty()) {
             throw new ProductException(ErrorCodeEnum.UNKNOWN_ERROR);
         }
-        log.info("GetAllProducts.service successed");
+        log.info("GetAllProducts.service success");
         return getAllProducts.stream()
                 .map(products -> modelMapper.map(products, ProductDto.class))
                 .collect(Collectors.toList());
@@ -85,7 +118,7 @@ public class ProductImpl implements ProductInter {
         } else {
             productRepo.deleteById(id);
         }
-        log.info("Delete.service successed");
+        log.info("Delete.service success");
     }
 
     @Override
@@ -101,7 +134,7 @@ public class ProductImpl implements ProductInter {
 
             return productRepo.save(newProduct);
         }
-        log.info("Update.service successed");
+        log.info("Update.service success");
         throw new ProductException(ErrorCodeEnum.NOT_ENOUGH_PRODUCT);
 
     }

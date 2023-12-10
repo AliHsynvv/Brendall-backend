@@ -13,13 +13,16 @@ public class ProductDto {
     String description;
     boolean isActivated;
     boolean isDeleted;
-    long colourId;
+    List<Long> colourIds;
     long priceId;
     long discountId;
-    long feedId;
-    long storeId;
+    List<Long> feedIds;
+    List<Long> sizeIds;
+    List<Long> storeIds;
     long genderId;
     long categoryId;
+    List<Long> imageIds;
+    List<Long> fileIds;
 
 
 }
