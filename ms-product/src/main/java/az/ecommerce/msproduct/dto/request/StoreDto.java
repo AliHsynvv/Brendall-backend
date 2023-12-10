@@ -12,7 +12,7 @@ public class StoreDto {
     String storeName;
     String storeIcon;
     String storeLocation;
-    long productId;
+    List<Long> productIds;
 
 
 

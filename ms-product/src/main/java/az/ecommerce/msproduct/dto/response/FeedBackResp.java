@@ -9,7 +9,7 @@ public class FeedBackResp {
 
     long feedId;
     double feedRank;
-    ProductResp product;
+    long productId;
     LocalDateTime responseAt;
 
 

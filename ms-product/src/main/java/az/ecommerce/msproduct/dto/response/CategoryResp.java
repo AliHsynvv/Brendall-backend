@@ -9,9 +9,10 @@ import java.util.List;
 
 @Data
 public class CategoryResp {
-    Long id;
+
+    long id;
     String name;
-    List<Product> products = new ArrayList<>();
+    List<Long> productIds;
     LocalDateTime responseAt;
 
 }

@@ -12,9 +12,7 @@ public class StoreResp {
     String storeName;
     String storeIcon;
     String storeLocation;
-    List<ProductResp> productList;
+    List<Long> productIds;
     LocalDateTime responseAt;
-
-
 
 }

@@ -1,25 +1,31 @@
 package az.ecommerce.msproduct.dto.response;
 
 import az.ecommerce.msproduct.entity.*;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
+@Builder
 public class ProductResp {
 
     long productId;
     String productName;
     String description;
-    String productIcons;
     boolean isActivated;
     boolean isDeleted;
-    long colourId;
-    long  priceId;
+    List<Long> colourIds;
+    long priceId;
     long discountId;
-    long feedId;
-    long storeId;
+    List<Long> feedIds;
+    List<Long> sizeIds;
+    List<Long> storeIds;
+    long genderId;
+    long categoryId;
+    List<Long> imageIds;
+    List<Long> fileIds;
     LocalDateTime responseAt;
 
 

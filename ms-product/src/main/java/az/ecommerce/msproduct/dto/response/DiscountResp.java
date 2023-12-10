@@ -12,6 +12,6 @@ public class DiscountResp {
     BigDecimal percentage;
     LocalDateTime startDate;
     LocalDateTime endDate;
-    ProductResp products;
+    long productId;
     LocalDateTime responseAt;
 }

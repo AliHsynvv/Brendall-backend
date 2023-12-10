@@ -10,10 +10,10 @@ import java.util.List;
 
 @Data
 public class GenderDto {
-    private Long id;
-    private String name;
 
-    long productId;
+    long id;
+    String name;
+    List<Long> productIds;
 
 }
 

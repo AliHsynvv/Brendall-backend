@@ -8,9 +8,9 @@ import java.util.List;
 
 @Data
 public class CategoryDto {
-    Long id;
-    String name;
 
-    long productId;
+    long id;
+    String name;
+    List<Long> productIds;
 
 }

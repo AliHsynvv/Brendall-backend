@@ -18,7 +18,7 @@ public class Colour {
     String colourName;
 
     @ManyToOne
-    Product products;
+    Product product;
 
 
 }

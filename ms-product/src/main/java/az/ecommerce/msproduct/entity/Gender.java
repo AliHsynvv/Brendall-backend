@@ -16,12 +16,12 @@ import java.util.List;
 public class Gender {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long genderId;
+    long genderId;
 
-    private String name;
+    String name;
 
     @OneToMany(mappedBy = "gender")
-    private List<Product> products;
+    List<Product> productList;
 }
 
 
