@@ -29,7 +29,7 @@ public class ColourImpl implements ColourInter {
                 .colourName(colourDto.getColourName())
                 .build();
         colourRepo.save(colour);
-        log.info("Created.service successed");
+        log.info("Created.service success");
     }
 
     @Override
@@ -39,7 +39,7 @@ public class ColourImpl implements ColourInter {
         if (findC.isEmpty()) {
             throw new ColourException(ErrorCodeEnum.COLOUR_NOT_FOUND);
         }
-        log.info("FindById.service successed");
+        log.info("FindById.service success");
         return findC.map(colourE -> modelMapper.map(colourE, ColourDto.class)).orElseThrow();
     }
 
@@ -50,7 +50,7 @@ public class ColourImpl implements ColourInter {
         if (getAllColours.isEmpty()) {
             throw new ColourException(ErrorCodeEnum.UNKNOWN_ERROR);
         }
-        log.info("GetAllColours.service successed");
+        log.info("GetAllColours.service success");
         return getAllColours.stream()
                 .map(colours -> modelMapper.map(colours, ColourDto.class))
                 .collect(Collectors.toList());
@@ -66,7 +66,7 @@ public class ColourImpl implements ColourInter {
         } else {
             colourRepo.deleteById(id);
         }
-        log.info("Delete.service successed");
+        log.info("Delete.service success");
     }
 
     @Override
@@ -80,7 +80,7 @@ public class ColourImpl implements ColourInter {
 
             return colourRepo.save(newColour);
         }
-        log.info("Update.service successed");
+        log.info("Update.service success");
         throw new ColourException(ErrorCodeEnum.NOT_ENOUGH_COLOUR);
     }
 }

@@ -42,7 +42,7 @@ public class StoreImpl implements StoreInter {
                 .build();
 
         storeRepo.save(store);
-        log.info("Created.service successed");
+        log.info("Created.service success");
     }
 
     @Override
@@ -52,7 +52,7 @@ public class StoreImpl implements StoreInter {
         if (findSt.isEmpty()) {
             throw new StoreException(ErrorCodeEnum.STORE_NOT_FOUND);
         }
-        log.info("FindById.service successed");
+        log.info("FindById.service success");
         return findSt.map(findStore -> modelMapper.map(findStore, StoreDto.class)).orElseThrow();
     }
 
@@ -63,7 +63,7 @@ public class StoreImpl implements StoreInter {
         if (getAllStore.isEmpty()) {
             throw new StoreException(ErrorCodeEnum.UNKNOWN_ERROR);
         }
-        log.info("GetAllStores.service successed");
+        log.info("GetAllStores.service success");
         return getAllStore.stream()
                 .map(stores -> modelMapper.map(stores, StoreDto.class))
                 .collect(Collectors.toList());
@@ -79,7 +79,7 @@ public class StoreImpl implements StoreInter {
         } else {
             storeRepo.deleteById(id);
         }
-        log.info("Delete.service successed");
+        log.info("Delete.service success");
     }
 
     @Override
@@ -95,7 +95,7 @@ public class StoreImpl implements StoreInter {
 
             return storeRepo.save(newStore);
         }
-        log.info("Update.service successed");
+        log.info("Update.service success");
         throw new StoreException(ErrorCodeEnum.NOT_ENOUGH_STORE);
     }
 }

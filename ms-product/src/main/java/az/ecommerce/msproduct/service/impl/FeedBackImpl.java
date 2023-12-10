@@ -30,7 +30,7 @@ public class FeedBackImpl implements FeedBackInter {
                 .feedRank(feedBackDto.getFeedRank())
                 .build();
         feedBackRepo.save(feedBack);
-        log.info("Created.service successed");
+        log.info("Created.service success");
 
     }
 
@@ -41,7 +41,7 @@ public class FeedBackImpl implements FeedBackInter {
         if (findF.isEmpty()){
             throw new FeedBackException(ErrorCodeEnum.FEEDBACK_NOT_FOUND);
 
-        } log.info("FindById.service successed");
+        } log.info("FindById.service success");
 
         return findF.map(feedBack -> modelMapper.map(feedBack, FeedBackDto.class)).orElseThrow();
     }
@@ -53,7 +53,7 @@ public class FeedBackImpl implements FeedBackInter {
         if (getAllFeedBack.isEmpty()){
             throw new FeedBackException(ErrorCodeEnum.UNKNOWN_ERROR);
         }
-        log.info("GetAllGenders.service successed");
+        log.info("GetAllGenders.service success");
         return getAllFeedBack.stream().map(feedBack -> modelMapper.map(feedBack, FeedBackDto.class))
                 .collect(Collectors.toList());
     }
@@ -68,7 +68,7 @@ public class FeedBackImpl implements FeedBackInter {
         } else {
             feedBackRepo.deleteById(id);
         }
-        log.info("Delete.service successed");
+        log.info("Delete.service success");
     }
 
     @Override
@@ -81,7 +81,7 @@ public class FeedBackImpl implements FeedBackInter {
             newFeedBack.setFeedRank(feedBackDto.getFeedRank());
             return feedBackRepo.save(newFeedBack);
         }
-        log.info("Update.service successed");
+        log.info("Update.service success");
         throw new FeedBackException(ErrorCodeEnum.NOT_ENOUGH_FEEDBACK);
     }
 }

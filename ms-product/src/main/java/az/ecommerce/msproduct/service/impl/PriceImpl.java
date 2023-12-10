@@ -35,7 +35,7 @@ public class PriceImpl implements PriceInter {
                 .build();
 
         priceRepo.save(price);
-        log.info("Created.service successed");
+        log.info("Created.service success");
     }
 
     @Override
@@ -45,7 +45,7 @@ public class PriceImpl implements PriceInter {
         if ((findP.isEmpty())){
             throw new PriceException(ErrorCodeEnum.PRICE_NOT_FOUND);
         }
-        log.info("FindById.service successed");
+        log.info("FindById.service success");
 
 
         return findP.map(priceE -> modelMapper.map(priceE, PriceDto.class)).orElseThrow();
@@ -59,7 +59,7 @@ public class PriceImpl implements PriceInter {
         if (getAllPrice.isEmpty()){
             throw new PriceException(ErrorCodeEnum.UNKNOWN_ERROR);
         }
-        log.info("GetAllPrices.service successed");
+        log.info("GetAllPrices.service success");
         return getAllPrice.stream().map(prices -> modelMapper.map(prices, PriceDto.class))
                 .collect(Collectors.toList());
     }
@@ -74,7 +74,7 @@ public class PriceImpl implements PriceInter {
         } else {
             priceRepo.deleteById(id);
         }
-        log.info("Delete.service successed");
+        log.info("Delete.service success");
     }
 
     @Override
@@ -89,7 +89,7 @@ public class PriceImpl implements PriceInter {
            newPrice.setEndDate(priceDto.getEndDate());
            return priceRepo.save(newPrice);
        }
-        log.info("Update.service successed");
+        log.info("Update.service success");
 
         throw new PriceException(ErrorCodeEnum.NOT_ENOUGH_PRICE);
     }

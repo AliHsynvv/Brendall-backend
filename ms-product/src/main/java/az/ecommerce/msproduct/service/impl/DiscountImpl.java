@@ -33,7 +33,7 @@ public class DiscountImpl implements DiscountInter {
                 .endDate(discountDto.getEndDate())
                 .build();
         discountRepo.save(discount);
-        log.info("Created.service successed");
+        log.info("Created.service success");
     }
 
     @Override
@@ -43,7 +43,7 @@ public class DiscountImpl implements DiscountInter {
         if (findD.isEmpty()) {
             throw new DiscountException(ErrorCodeEnum.DISCOUNT_NOT_FOUND);
         }
-        log.info("FindById.service successed");
+        log.info("FindById.service success");
         return findD.map(discount -> modelMapper.map(discount, DiscountDto.class)).orElseThrow();
     }
 
@@ -54,7 +54,7 @@ public class DiscountImpl implements DiscountInter {
         if (getAllDiscounts.isEmpty()) {
             throw new DiscountException(ErrorCodeEnum.UNKNOWN_ERROR);
         }
-        log.info("GetAllColours.service successed");
+        log.info("GetAllColours.service success");
         return getAllDiscounts.stream()
                 .map(discounts -> modelMapper.map(discounts, DiscountDto.class))
                 .collect(Collectors.toList());
@@ -70,7 +70,7 @@ public class DiscountImpl implements DiscountInter {
         } else {
             discountRepo.deleteById(id);
         }
-        log.info("Delete.service successed");
+        log.info("Delete.service success");
     }
 
     @Override
@@ -86,7 +86,7 @@ public class DiscountImpl implements DiscountInter {
 
             return discountRepo.save(newDiscount);
         }
-        log.info("Update.service successed");
+        log.info("Update.service success");
         throw new DiscountException(ErrorCodeEnum.NOT_ENOUGH_DISCOUNT);
     }
 }

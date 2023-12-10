@@ -32,7 +32,7 @@ public class GenderImpl implements GenderInter {
                 .name(genderDto.getName())
                 .build();
         genderRepo.save(gender);
-        log.info("Created.service successed");
+        log.info("Created.service success");
     }
 
     @Override
@@ -42,7 +42,7 @@ public class GenderImpl implements GenderInter {
         if (findG.isEmpty()) {
             throw new GenderException(ErrorCodeEnum.GENDER_NOT_FOUND);
         }
-        log.info("FindById.service successed");
+        log.info("FindById.service success");
         return findG.map(gender -> modelMapper.map(gender, GenderDto.class)).orElseThrow();
     }
 
@@ -53,7 +53,7 @@ public class GenderImpl implements GenderInter {
         if (getAllGenders.isEmpty()) {
             throw new GenderException(ErrorCodeEnum.UNKNOWN_ERROR);
         }
-        log.info("GetAllGenders.service successed");
+        log.info("GetAllGenders.service success");
         return getAllGenders.stream()
                 .map(genders -> modelMapper.map(genders, GenderDto.class))
                 .collect(Collectors.toList());
@@ -69,7 +69,7 @@ public class GenderImpl implements GenderInter {
         } else {
             genderRepo.deleteById(id);
         }
-        log.info("Delete.service successed");
+        log.info("Delete.service success");
     }
 
     @Override
@@ -83,7 +83,7 @@ public class GenderImpl implements GenderInter {
 
             return genderRepo.save(newGender);
         }
-        log.info("Update.service successed");
+        log.info("Update.service success");
         throw new GenderException(ErrorCodeEnum.NOT_ENOUGH_GENDER);
     }
 }

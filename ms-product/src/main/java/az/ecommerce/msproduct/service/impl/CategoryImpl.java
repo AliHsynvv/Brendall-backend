@@ -33,7 +33,7 @@ public class CategoryImpl implements CategoryInter {
                 .name(categoryDto.getName())
                 .build();
         categoryRepo.save(category);
-        log.info("Created.service successed");
+        log.info("Created.service success");
     }
 
     @Override
@@ -43,7 +43,7 @@ public class CategoryImpl implements CategoryInter {
         if (findC.isEmpty()) {
             throw new CategoryException(ErrorCodeEnum.CATEGORY_NOT_FOUND);
         }
-        log.info("FindById.service successed");
+        log.info("FindById.service success");
         return findC.map(categoryE -> modelMapper.map(categoryE, CategoryDto.class)).orElseThrow();
     }
 
@@ -55,7 +55,7 @@ public class CategoryImpl implements CategoryInter {
         if (getAllCategories.isEmpty()) {
             throw new CategoryException(ErrorCodeEnum.UNKNOWN_ERROR);
         }
-        log.info("GetAllCategory.service successed");
+        log.info("GetAllCategory.service success");
         return getAllCategories.stream()
                 .map(categories -> modelMapper.map(categories, CategoryDto.class))
                 .collect(Collectors.toList());
@@ -71,7 +71,7 @@ public class CategoryImpl implements CategoryInter {
         } else {
             categoryRepo.deleteById(id);
         }
-        log.info("Delete.service successed");
+        log.info("Delete.service success");
     }
 
     @Override
@@ -85,7 +85,7 @@ public class CategoryImpl implements CategoryInter {
 
             return categoryRepo.save(newCategory);
         }
-        log.info("Update.service successed");
+        log.info("Update.service success");
         throw new CategoryException(ErrorCodeEnum.NOT_ENOUGH_CATEGORY);
     }
 }

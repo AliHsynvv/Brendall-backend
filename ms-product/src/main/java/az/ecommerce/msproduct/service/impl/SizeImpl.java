@@ -31,7 +31,7 @@ public class SizeImpl implements SizeInter {
                 .sizeName(sizeDto.getSizeName())
                 .build();
              sizeRepo.save(size);
-        log.info("Created.service successed");
+        log.info("Created.service success");
     }
 
     @Override
@@ -41,7 +41,7 @@ public class SizeImpl implements SizeInter {
         if (findS.isEmpty()) {
             throw new SizeException(ErrorCodeEnum.SIZE_NOT_FOUND);
         }
-        log.info("FindById service successed");
+        log.info("FindById service success");
         return findS.map(sizeE -> modelMapper.map(sizeE, SizeDto.class)).orElseThrow();
     }
 
@@ -52,7 +52,7 @@ public class SizeImpl implements SizeInter {
         if (getAllSize.isEmpty()) {
             throw new SizeException(ErrorCodeEnum.UNKNOWN_ERROR);
         }
-        log.info("GetAllSizes.service successed");
+        log.info("GetAllSizes.service success");
         return getAllSize.stream()
                 .map(sizes -> modelMapper.map(sizes, SizeDto.class))
                 .collect(Collectors.toList());
@@ -68,7 +68,7 @@ public class SizeImpl implements SizeInter {
         } else {
             sizeRepo.deleteById(id);
         }
-        log.info("Delete.service successed");
+        log.info("Delete.service success");
     }
 
     @Override
@@ -82,7 +82,7 @@ public class SizeImpl implements SizeInter {
 
             return sizeRepo.save(newSize);
         }
-        log.info("Update.service successed");
+        log.info("Update.service success");
         throw new SizeException(ErrorCodeEnum.NOT_ENOUGH_SIZE);
     }
 }
