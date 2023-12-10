@@ -21,8 +21,10 @@ public class Category {
 
     long categoryId;
     String name;
+    @OneToMany
+    List<Category> subCategory;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToMany(mappedBy = "categoryList")
     List<Product> productList;
 
 

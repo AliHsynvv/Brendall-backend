@@ -37,10 +37,6 @@ public class ProductImpl implements ProductInter {
     public void create(ProductDto productDto) {
         log.info("Create.service started");
 
-        Optional<Category> existingCategory = categoryRepo.findById(productDto.getCategoryId());
-        Category category = existingCategory.orElseThrow(() ->
-                new IllegalArgumentException("Category not found for ID: " + productDto.getCategoryId()));
-
         Optional<Discount> existingDiscount = discountRepo.findById(productDto.getDiscountId());
         Discount discount = existingDiscount.orElseThrow(() ->
                 new IllegalArgumentException("Discount not found for ID: " + productDto.getDiscountId()));
@@ -53,6 +49,7 @@ public class ProductImpl implements ProductInter {
         Gender gender = existingGender.orElseThrow(() ->
                 new IllegalArgumentException("Gender not found for ID: " + productDto.getGenderId()));
 
+        List<Category> categoryList = categoryRepo.findAllById(productDto.getCategoryIds());
         List<Colour> colourList = colourRepo.findAllById(productDto.getColourIds());
         List<FeedBack> feedBackList = feedBackRepo.findAllById(productDto.getFeedIds());
         List<FileData> fileList = fileDataRepo.findAllById(productDto.getFileIds());
@@ -65,7 +62,7 @@ public class ProductImpl implements ProductInter {
                 .description(productDto.getDescription())
                 .isActivated(true)
                 .isDeleted(false)
-                .category(category)
+                .categoryList(categoryList)
                 .colourList(colourList)
                 .discount(discount)
                 .feedBackList(feedBackList)

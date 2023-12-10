@@ -46,9 +46,12 @@ public class Product {
     @JoinColumn(name = "gender_id")
     Gender gender;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    Category category;
+    @ManyToMany
+    @JoinTable(
+            name = "product_catgory",
+            joinColumns = @JoinColumn(name = "productId"),
+            inverseJoinColumns = @JoinColumn(name = "categoryId"))
+    List<Category> categoryList;
 
     @OneToMany(targetEntity = Size.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "psize_fk",referencedColumnName = "productId")

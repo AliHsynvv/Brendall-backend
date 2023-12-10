@@ -20,7 +20,7 @@ public class ProductDto {
     List<Long> sizeIds;
     List<Long> storeIds;
     long genderId;
-    long categoryId;
+    List<Long> categoryIds;
     List<Long> imageIds;
     List<Long> fileIds;
 

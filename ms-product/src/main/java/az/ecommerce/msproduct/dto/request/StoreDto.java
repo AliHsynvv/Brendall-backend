@@ -1,5 +1,6 @@
 package az.ecommerce.msproduct.dto.request;
 
+import az.ecommerce.msproduct.entity.FileData;
 import az.ecommerce.msproduct.entity.Product;
 import lombok.*;
 
@@ -10,8 +11,7 @@ public class StoreDto {
 
     long storeId;
     String storeName;
-    String storeIcon;
-    String storeLocation;
+    FileData storeIcon;
     List<Long> productIds;
 
 

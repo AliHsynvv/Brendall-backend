@@ -20,9 +20,8 @@ public class Store {
     long storeId;
 
     String storeName;
-    String storeIcon;
-    String storeLocation;
-
+    @OneToOne
+    FileData storeIcon;
     @ManyToMany(mappedBy = "storeList")
     List<Product> productList;
 

@@ -1,5 +1,6 @@
 package az.ecommerce.msproduct.dto.request;
 
+import az.ecommerce.msproduct.entity.Category;
 import az.ecommerce.msproduct.entity.Product;
 import lombok.*;
 
@@ -11,6 +12,7 @@ public class CategoryDto {
 
     long id;
     String name;
+    List<Category> subCategory;
     List<Long> productIds;
 
 }

@@ -22,7 +22,11 @@ public class FileData {
     String name;
     String type;
     String filePath;
+
     @ManyToOne
     Product product;
+
+    @OneToOne
+    Store store;
 
 }
