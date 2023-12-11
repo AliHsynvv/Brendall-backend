@@ -32,12 +32,10 @@ public class StoreImpl implements StoreInter {
     @Override
     public void create(StoreDto storeDto) {
         log.info("Create.service started");
-        List<Product> productList = productRepo.findAllById(storeDto.getProductIds());
 
         Store store = Store.builder()
                 .storeName(storeDto.getStoreName())
                 .storeIcon(storeDto.getStoreIcon())
-                .productList(productList)
                 .build();
 
         storeRepo.save(store);

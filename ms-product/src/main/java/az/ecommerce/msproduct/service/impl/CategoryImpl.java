@@ -30,10 +30,8 @@ public class CategoryImpl implements CategoryInter {
     @Override
     public void create(CategoryDto categoryDto) {
         log.info("Create.service started");
-        List<Product> productList = productRepo.findAllById(categoryDto.getProductIds());
         Category category = Category.builder()
                 .name(categoryDto.getName())
-                .productList(productList)
                 .build();
         categoryRepo.save(category);
         log.info("Created.service success");

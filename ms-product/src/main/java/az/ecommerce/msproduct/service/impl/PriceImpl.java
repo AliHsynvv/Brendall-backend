@@ -31,15 +31,10 @@ public class PriceImpl implements PriceInter {
 
         log.info("Create.service started");
 
-        Optional<Product> existingProduct = productRepo.findById(priceDto.getProductId());
-        Product product = existingProduct.orElseThrow(() ->
-                new IllegalArgumentException("Product not found for ID: " + priceDto.getProductId()));
-
         Price price = Price.builder()
                 .amount(priceDto.getAmount())
                 .startDate(priceDto.getStartDate())
                 .endDate(priceDto.getEndDate())
-                .product(product)
                 .build();
 
         priceRepo.save(price);

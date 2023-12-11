@@ -30,13 +30,8 @@ public class ColourImpl implements ColourInter {
     public void create(ColourDto colourDto) {
         log.info("Create.service started");
 
-        Optional<Product> existingProduct = productRepo.findById(colourDto.getProductId());
-        Product product = existingProduct.orElseThrow(() ->
-                new IllegalArgumentException("Product not found for ID: " + colourDto.getProductId()));
-
         Colour colour = Colour.builder()
                 .colourName(colourDto.getColourName())
-                .product(product)
                 .build();
         colourRepo.save(colour);
         log.info("Created.service success");

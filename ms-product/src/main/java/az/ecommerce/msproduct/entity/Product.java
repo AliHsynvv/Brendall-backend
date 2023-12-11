@@ -27,19 +27,19 @@ public class Product {
     boolean isDeleted;
 
     @OneToMany(targetEntity = Colour.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "pc_fk",referencedColumnName = "productId")
+    @JoinColumn(name = "colour_id",referencedColumnName = "productId")
     List<Colour> colourList;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "pp_fk")
+    @JoinColumn(name = "price_id")
     Price price;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "pd_fk")
+    @JoinColumn(name = "discount_id")
     Discount discount;
 
     @OneToMany(targetEntity = FeedBack.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "pf_fk",referencedColumnName = "productId")
+    @JoinColumn(name = "feed_id",referencedColumnName = "productId")
     List<FeedBack> feedBackList;
 
     @ManyToOne
@@ -48,28 +48,28 @@ public class Product {
 
     @ManyToMany
     @JoinTable(
-            name = "product_catgory",
+            name = "category_id",
             joinColumns = @JoinColumn(name = "productId"),
             inverseJoinColumns = @JoinColumn(name = "categoryId"))
     List<Category> categoryList;
 
     @OneToMany(targetEntity = Size.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "psize_fk",referencedColumnName = "productId")
+    @JoinColumn(name = "size_id",referencedColumnName = "productId")
     List<Size> sizeList;
 
     @ManyToMany
     @JoinTable(
-            name = "product_store",
+            name = "store_id",
             joinColumns = @JoinColumn(name = "productId"),
             inverseJoinColumns = @JoinColumn(name = "storeId"))
     List<Store> storeList;
 
     @OneToMany(targetEntity = FileData.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "pfile_fk",referencedColumnName = "productId")
+    @JoinColumn(name = "file_id",referencedColumnName = "productId")
     List<FileData> fileData;
 
     @OneToMany(targetEntity = ImageData.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "pi_fk",referencedColumnName = "productId")
+    @JoinColumn(name = "image_id",referencedColumnName = "productId")
     List<ImageData> imageDataList;
 
 

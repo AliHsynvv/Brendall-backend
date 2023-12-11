@@ -30,10 +30,8 @@ public class GenderImpl implements GenderInter {
     @Override
     public void create(GenderDto genderDto) {
         log.info("Create.service started");
-        List<Product> productList = productRepo.findAllById(genderDto.getProductIds());
         Gender gender = Gender.builder()
                 .name(genderDto.getName())
-                .productList(productList)
                 .build();
         genderRepo.save(gender);
         log.info("Created.service success");

@@ -20,5 +20,4 @@ public class Colour {
     @ManyToOne
     Product product;
 
-
 }

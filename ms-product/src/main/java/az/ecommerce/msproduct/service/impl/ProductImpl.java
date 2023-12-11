@@ -36,20 +36,21 @@ public class ProductImpl implements ProductInter {
     @Override
     public void create(ProductDto productDto) {
         log.info("Create.service started");
-
+        Optional<Price> existingPrice = priceRepo.findById(productDto.getPriceId());
+        Price price = existingPrice.orElseThrow(() ->
+                new IllegalArgumentException("Price not found for ID: " + productDto.getPriceId()));
+        List<Category> categoryList = categoryRepo.findAllById(productDto.getCategoryIds());
         Optional<Discount> existingDiscount = discountRepo.findById(productDto.getDiscountId());
         Discount discount = existingDiscount.orElseThrow(() ->
                 new IllegalArgumentException("Discount not found for ID: " + productDto.getDiscountId()));
 
-        Optional<Price> existingPrice = priceRepo.findById(productDto.getPriceId());
-        Price price = existingPrice.orElseThrow(() ->
-                new IllegalArgumentException("Price not found for ID: " + productDto.getPriceId()));
+
 
         Optional<Gender> existingGender = genderRepo.findById(productDto.getGenderId());
         Gender gender = existingGender.orElseThrow(() ->
                 new IllegalArgumentException("Gender not found for ID: " + productDto.getGenderId()));
 
-        List<Category> categoryList = categoryRepo.findAllById(productDto.getCategoryIds());
+
         List<Colour> colourList = colourRepo.findAllById(productDto.getColourIds());
         List<FeedBack> feedBackList = feedBackRepo.findAllById(productDto.getFeedIds());
         List<FileData> fileList = fileDataRepo.findAllById(productDto.getFileIds());

@@ -30,13 +30,8 @@ public class SizeImpl implements SizeInter {
     public void create(SizeDto sizeDto) {
         log.info("Create.service started");
 
-        Optional<Product> existingProduct = productRepo.findById(sizeDto.getProductId());
-        Product product = existingProduct.orElseThrow(() ->
-                new IllegalArgumentException("Product not found for ID: " + sizeDto.getProductId()));
-
         Size size = Size.builder()
                 .sizeName(sizeDto.getSizeName())
-                .product(product)
                 .build();
              sizeRepo.save(size);
         log.info("Created.service success");

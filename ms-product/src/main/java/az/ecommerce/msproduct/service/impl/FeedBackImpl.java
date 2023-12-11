@@ -29,13 +29,8 @@ public class FeedBackImpl implements FeedBackInter {
     public void create(FeedBackDto feedBackDto) {
         log.info("Create.service started");
 
-        Optional<Product> existingProduct = productRepo.findById(feedBackDto.getProductId());
-        Product product = existingProduct.orElseThrow(() ->
-                new IllegalArgumentException("Product not found for ID: " + feedBackDto.getProductId()));
-
         FeedBack feedBack = FeedBack.builder()
                 .feedRank(feedBackDto.getFeedRank())
-                .product(product)
                 .build();
         feedBackRepo.save(feedBack);
         log.info("Created.service success");

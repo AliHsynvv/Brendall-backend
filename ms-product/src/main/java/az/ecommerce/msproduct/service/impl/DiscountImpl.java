@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class DiscountImpl implements DiscountInter {
-    private final ProductRepo productRepo;
     private final DiscountRepo discountRepo;
     private final ModelMapper modelMapper;
 
@@ -30,15 +29,10 @@ public class DiscountImpl implements DiscountInter {
     public void create(DiscountDto discountDto) {
         log.info("Create.service started");
 
-        Optional<Product> existingProduct = productRepo.findById(discountDto.getProductId());
-        Product product = existingProduct.orElseThrow(() ->
-                new IllegalArgumentException("Product not found for ID: " + discountDto.getProductId()));
-
         Discount discount = Discount.builder()
                 .percentage(discountDto.getPercentage())
                 .startDate(discountDto.getStartDate())
                 .endDate(discountDto.getEndDate())
-                .product(product)
                 .build();
         discountRepo.save(discount);
         log.info("Created.service success");
