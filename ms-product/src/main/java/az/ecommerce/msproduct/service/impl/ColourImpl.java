@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class ColourImpl implements ColourInter {
-    private final ProductRepo productRepo;
+
     private final ColourRepo colourRepo;
     private final ModelMapper modelMapper;
     @Override

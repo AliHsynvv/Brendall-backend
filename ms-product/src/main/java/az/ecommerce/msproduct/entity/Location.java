@@ -1,5 +1,6 @@
 package az.ecommerce.msproduct.entity;
 
+
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -7,18 +8,22 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @Data
 @Table
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Colour {
+public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long colourId;
-    String colourName;
+
+    long locationId;
+
+    double latitude;
+    double longitude;
 
     @ManyToOne
-    Product product;
+    Store store;
+
 
 }

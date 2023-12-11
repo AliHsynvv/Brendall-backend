@@ -13,6 +13,7 @@ public class StoreDto {
     String storeName;
     FileData storeIcon;
     List<Long> productIds;
+    List<Long> locationIds;
 
 
 

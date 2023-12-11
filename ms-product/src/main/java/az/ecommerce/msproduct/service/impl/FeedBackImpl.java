@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class FeedBackImpl implements FeedBackInter {
-    private final ProductRepo productRepo;
+
     private final FeedBackRepo feedBackRepo;
     private final ModelMapper modelMapper;
     @Override

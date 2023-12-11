@@ -24,7 +24,9 @@ public enum ErrorCodeEnum {
     NOT_ENOUGH_PRICE(1016, "Price not found!"),
     SIZE_NOT_FOUND(1017, "Cannot find size with given id!"),
     NOT_ENOUGH_SIZE(1018, "Size not found!"),
-    INVALID_FILE(1019,"File is invalid!");
+    LOCATION_NOT_FOUND(1019, "Cannot find location with given id!"),
+    NOT_ENOUGH_LOCATION(1020, "Location not found!"),
+    INVALID_FILE(1021,"File is invalid!");
 
 
     private final int code;

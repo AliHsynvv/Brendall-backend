@@ -4,12 +4,12 @@ import az.ecommerce.msproduct.enums.ErrorCodeEnum;
 import lombok.Getter;
 
 @Getter
-public class IsActiveException extends RuntimeException {
+public class LocationException extends RuntimeException {
 
     private final String message;
     private final int code;
 
-    public IsActiveException(ErrorCodeEnum errorCodeEnum) {
+    public LocationException(ErrorCodeEnum errorCodeEnum) {
         super(errorCodeEnum.getMessage());
         this.message = errorCodeEnum.getMessage();
         this.code = errorCodeEnum.getCode();

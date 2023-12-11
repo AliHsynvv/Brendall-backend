@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class CategoryImpl implements CategoryInter {
-    private final ProductRepo productRepo;
+
     private final CategoryRepo categoryRepo;
     private final ModelMapper modelMapper;
 

@@ -13,6 +13,7 @@ public class StoreResp {
     String storeName;
     FileData storeIcon;
     List<Long> productIds;
+    List<Long> locationIds;
     LocalDateTime responseAt;
 
 }

@@ -25,6 +25,9 @@ public class Store {
     @ManyToMany(mappedBy = "storeList")
     List<Product> productList;
 
+    @OneToMany(targetEntity = Location.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "location_id",referencedColumnName = "StoreId")
+    List<Location> locationList;
 
 
 }
