@@ -26,7 +26,7 @@ public class Store {
     List<Product> productList;
 
     @OneToMany(targetEntity = Location.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "locationId",referencedColumnName = "storeId")
+    @JoinColumn(name = "loc_id",referencedColumnName = "StoreId")
     List<Location> locationList;
 
 

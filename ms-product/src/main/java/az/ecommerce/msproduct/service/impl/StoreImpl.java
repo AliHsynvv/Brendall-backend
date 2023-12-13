@@ -1,7 +1,10 @@
 package az.ecommerce.msproduct.service.impl;
 
 import az.ecommerce.msproduct.dto.request.StoreDto;
-import az.ecommerce.msproduct.entity.*;
+import az.ecommerce.msproduct.entity.FileData;
+import az.ecommerce.msproduct.entity.Location;
+import az.ecommerce.msproduct.entity.Product;
+import az.ecommerce.msproduct.entity.Store;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
 import az.ecommerce.msproduct.exception.SizeException;
 import az.ecommerce.msproduct.exception.StoreException;
@@ -24,10 +27,11 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class StoreImpl implements StoreInter {
-    private final LocationRepo locationRepo;
+    private final ProductRepo productRepo;
     private final StoreRepo storeRepo;
     private final ModelMapper modelMapper;
 
+    private final LocationRepo locationRepo;
     @Override
     public void create(StoreDto storeDto) {
         log.info("Create.service started");
