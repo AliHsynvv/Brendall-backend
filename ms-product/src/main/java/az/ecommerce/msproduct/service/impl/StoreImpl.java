@@ -2,12 +2,14 @@ package az.ecommerce.msproduct.service.impl;
 
 import az.ecommerce.msproduct.dto.request.StoreDto;
 import az.ecommerce.msproduct.entity.FileData;
+import az.ecommerce.msproduct.entity.Location;
 import az.ecommerce.msproduct.entity.Product;
 import az.ecommerce.msproduct.entity.Store;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
 import az.ecommerce.msproduct.exception.SizeException;
 import az.ecommerce.msproduct.exception.StoreException;
 import az.ecommerce.msproduct.repository.FileDataRepo;
+import az.ecommerce.msproduct.repository.LocationRepo;
 import az.ecommerce.msproduct.repository.ProductRepo;
 import az.ecommerce.msproduct.repository.StoreRepo;
 import az.ecommerce.msproduct.service.inter.StoreInter;
@@ -29,13 +31,17 @@ public class StoreImpl implements StoreInter {
     private final StoreRepo storeRepo;
     private final ModelMapper modelMapper;
 
+    private final LocationRepo locationRepo;
     @Override
     public void create(StoreDto storeDto) {
         log.info("Create.service started");
 
+        List<Location> locationList = locationRepo.findAllById(storeDto.getLocationIds());
+
         Store store = Store.builder()
                 .storeName(storeDto.getStoreName())
                 .storeIcon(storeDto.getStoreIcon())
+                .locationList(locationList)
                 .build();
 
         storeRepo.save(store);

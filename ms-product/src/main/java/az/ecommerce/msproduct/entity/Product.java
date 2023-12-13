@@ -27,7 +27,7 @@ public class Product {
     boolean isDeleted;
 
     @OneToMany(targetEntity = Colour.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "colour_id",referencedColumnName = "productId")
+    @JoinColumn(name = "colourr_id",referencedColumnName = "productId")
     List<Colour> colourList;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -39,7 +39,7 @@ public class Product {
     Discount discount;
 
     @OneToMany(targetEntity = FeedBack.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "feed_id",referencedColumnName = "productId")
+    @JoinColumn(name = "feedd_id",referencedColumnName = "productId")
     List<FeedBack> feedBackList;
 
     @ManyToOne
@@ -54,7 +54,7 @@ public class Product {
     List<Category> categoryList;
 
     @OneToMany(targetEntity = Size.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "size_id",referencedColumnName = "productId")
+    @JoinColumn(name = "siz_id",referencedColumnName = "productId")
     List<Size> sizeList;
 
     @ManyToMany
