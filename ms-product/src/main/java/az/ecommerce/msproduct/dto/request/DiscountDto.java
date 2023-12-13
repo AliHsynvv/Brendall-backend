@@ -1,5 +1,6 @@
 package az.ecommerce.msproduct.dto.request;
 
+import az.ecommerce.msproduct.entity.Product;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -12,5 +13,5 @@ public class DiscountDto {
     BigDecimal percentage;
     LocalDateTime startDate;
     LocalDateTime endDate;
-    ProductDto products;
+    long productId;
 }

@@ -22,8 +22,6 @@ public class FeedBack {
     @Max(value = 5)
     double feedRank;
 
-    String feedComment;
-    String feedIcon;
     @ManyToOne
     Product product;
 

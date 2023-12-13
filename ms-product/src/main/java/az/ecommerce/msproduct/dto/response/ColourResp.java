@@ -9,7 +9,7 @@ public class ColourResp {
 
     long colourId;
     String colourName;
-    ProductResp products;
+    long productId;
     LocalDateTime responseAt;
 
 

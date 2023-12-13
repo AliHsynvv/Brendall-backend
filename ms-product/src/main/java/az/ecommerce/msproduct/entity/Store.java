@@ -3,9 +3,7 @@ package az.ecommerce.msproduct.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -22,12 +20,14 @@ public class Store {
     long storeId;
 
     String storeName;
-    String storeIcon;
-    String storeLocation;
-
+    @OneToOne
+    FileData storeIcon;
     @ManyToMany(mappedBy = "storeList")
     List<Product> productList;
 
+    @OneToMany(targetEntity = Location.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "loc_id",referencedColumnName = "StoreId")
+    List<Location> locationList;
 
 
 }

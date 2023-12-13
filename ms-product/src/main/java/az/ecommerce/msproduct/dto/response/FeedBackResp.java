@@ -9,9 +9,7 @@ public class FeedBackResp {
 
     long feedId;
     double feedRank;
-    String feedIcon;
-    String feedComment;
-    ProductResp product;
+    long productId;
     LocalDateTime responseAt;
 
 

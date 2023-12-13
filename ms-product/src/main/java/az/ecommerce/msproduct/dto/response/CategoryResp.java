@@ -1,5 +1,6 @@
 package az.ecommerce.msproduct.dto.response;
 
+import az.ecommerce.msproduct.entity.Category;
 import az.ecommerce.msproduct.entity.Product;
 import lombok.Data;
 
@@ -9,9 +10,11 @@ import java.util.List;
 
 @Data
 public class CategoryResp {
-    Long id;
+
+    long id;
     String name;
-    List<Product> products = new ArrayList<>();
+    List<Category> subCategory;
+    List<Long> productIds;
     LocalDateTime responseAt;
 
 }

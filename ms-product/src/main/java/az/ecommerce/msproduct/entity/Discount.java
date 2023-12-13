@@ -23,5 +23,5 @@ public class Discount {
     LocalDateTime endDate;
 
     @OneToOne(mappedBy = "discount")
-    Product products;
+    Product product;
 }

@@ -1,0 +1,43 @@
+package az.ecommerce.msproduct.controller;
+
+import az.ecommerce.msproduct.dto.request.DiscountDto;
+import az.ecommerce.msproduct.entity.Discount;
+import az.ecommerce.msproduct.service.inter.DiscountInter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/discount")
+@RequiredArgsConstructor
+public class DiscountController {
+
+    private final DiscountInter discountInter;
+    @PostMapping("/create")
+    public void create(@RequestBody DiscountDto discountDto) {
+        discountInter.create(discountDto);
+    }
+
+    @GetMapping("/finddiscount/{id}")
+    public DiscountDto findById(@PathVariable long id) {
+        return discountInter.findById(id);
+    }
+
+    @GetMapping("/findall")
+    public List<DiscountDto> getAllDiscounts() {
+        return discountInter.getAllDiscounts();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @Transactional
+    public void delete(@PathVariable long id) {
+        discountInter.delete(id);
+    }
+
+    @PutMapping("/update/{id}")
+    public Discount update(@RequestBody DiscountDto discountDto, @PathVariable long id) {
+        return discountInter.update(discountDto, id);
+    }
+}

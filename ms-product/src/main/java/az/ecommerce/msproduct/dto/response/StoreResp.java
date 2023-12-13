@@ -1,5 +1,6 @@
 package az.ecommerce.msproduct.dto.response;
 
+import az.ecommerce.msproduct.entity.FileData;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -10,11 +11,9 @@ public class StoreResp {
 
     long storeId;
     String storeName;
-    String storeIcon;
-    String storeLocation;
-    List<ProductResp> productList;
+    FileData storeIcon;
+    List<Long> productIds;
+    List<Long> locationIds;
     LocalDateTime responseAt;
-
-
 
 }

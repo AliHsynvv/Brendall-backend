@@ -12,6 +12,6 @@ public class PriceResp {
     BigDecimal amount;
     LocalDateTime startDate;
     LocalDateTime endDate;
-    ProductResp products;
+    long productId;
     LocalDateTime responseAt;
 }

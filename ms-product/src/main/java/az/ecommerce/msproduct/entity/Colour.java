@@ -12,13 +12,13 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Colour {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long colourId;
     String colourName;
 
     @ManyToOne
-    Product products;
-
+    Product product;
 
 }

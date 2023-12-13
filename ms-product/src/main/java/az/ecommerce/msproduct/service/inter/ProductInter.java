@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public interface ProductInter {
-    void create(MultipartFile multipartFile, ProductDto productDto);
+    void create( ProductDto productDto);
 
     ProductDto findById(long id);
 

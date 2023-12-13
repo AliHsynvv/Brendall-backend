@@ -9,7 +9,7 @@ public class SizeResp {
 
     long sizeId;
     String sizeName;
-    ProductResp product;
+    long productId;
     LocalDateTime responseAt;
 
 
