@@ -1,6 +1,8 @@
 package az.ecommerce.msproduct.entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Null;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -26,6 +28,9 @@ public class Category {
 
     @ManyToMany(mappedBy = "categoryList")
     List<Product> productList;
+
+    @Nullable
+    long parentId;
 
 
 

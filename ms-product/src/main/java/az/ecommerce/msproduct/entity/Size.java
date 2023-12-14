@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Entity
 @Data
 @Table
@@ -18,8 +20,8 @@ public class Size {
     long sizeId;
     String sizeName;
 
-    @ManyToOne
-    Product product;
+    @ManyToMany
+    List<Product> productList;
 
 
 }

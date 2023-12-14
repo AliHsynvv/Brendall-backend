@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Entity
 @Data
 @Table
@@ -19,7 +21,7 @@ public class Colour {
     long colourId;
     String colourName;
 
-    @ManyToOne
-    Product product;
+    @ManyToMany
+    List<Product> productList;
 
 }
