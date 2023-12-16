@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Entity
 @Data
 @Table
@@ -15,10 +17,11 @@ public class Colour {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "colour_id")
     long colourId;
     String colourName;
 
-    @ManyToOne
-    Product product;
+    @ManyToMany
+    List<Product> productList;
 
 }

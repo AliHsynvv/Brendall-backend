@@ -26,8 +26,16 @@ public class Product {
     boolean isActivated;
     boolean isDeleted;
 
+<<<<<<< HEAD
     @OneToMany(targetEntity = Colour.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "colourr_id",referencedColumnName = "productId")
+=======
+    @ManyToMany
+    @JoinTable(
+            name = "colour_id",
+            joinColumns = @JoinColumn(name = "productId"),
+            inverseJoinColumns = @JoinColumn(name = "colourId"))
+>>>>>>> origin/Nicat
     List<Colour> colourList;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -53,8 +61,16 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "categoryId"))
     List<Category> categoryList;
 
+<<<<<<< HEAD
     @OneToMany(targetEntity = Size.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "siz_id",referencedColumnName = "productId")
+=======
+    @ManyToMany
+    @JoinTable(
+            name = "size_id",
+            joinColumns = @JoinColumn(name = "productId"),
+            inverseJoinColumns = @JoinColumn(name = "sizeId"))
+>>>>>>> origin/Nicat
     List<Size> sizeList;
 
     @ManyToMany
