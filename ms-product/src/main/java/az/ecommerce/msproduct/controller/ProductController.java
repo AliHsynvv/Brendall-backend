@@ -1,6 +1,7 @@
 package az.ecommerce.msproduct.controller;
 
 import az.ecommerce.msproduct.dto.request.ProductDto;
+import az.ecommerce.msproduct.dto.response.ProductResp;
 import az.ecommerce.msproduct.entity.Product;
 import az.ecommerce.msproduct.service.inter.ProductInter;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +18,8 @@ public class ProductController {
     private final ProductInter productInter;
 
     @PostMapping("/create")
-    public void create(@RequestBody ProductDto productDto){
-        productInter.create(productDto);
+    public void create(@RequestBody ProductResp productResp){
+        productInter.create(productResp);
     }
 
     @GetMapping("/findproduct/{id}")
@@ -38,8 +39,8 @@ public class ProductController {
     }
 
     @PutMapping("/update/{id}")
-    public Product update(@RequestBody ProductDto productDto, @PathVariable long id){
-       return productInter.update(productDto,id);
+    public Product update(@RequestBody ProductResp productResp, @PathVariable long id){
+       return productInter.update(productResp,id);
 
     }
 

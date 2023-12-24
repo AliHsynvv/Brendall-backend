@@ -1,6 +1,7 @@
 package az.ecommerce.msproduct.service.impl;
 
 import az.ecommerce.msproduct.dto.request.ProductDto;
+import az.ecommerce.msproduct.dto.response.ProductResp;
 import az.ecommerce.msproduct.entity.*;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
 import az.ecommerce.msproduct.exception.ProductException;
@@ -9,6 +10,8 @@ import az.ecommerce.msproduct.service.inter.ProductInter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +23,10 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class ProductImpl implements ProductInter {
-    private final ProductRepo productRepo;
     private final ModelMapper modelMapper;
+
+    private final ProductRepo productRepo;
+
     private final CategoryRepo categoryRepo;
     private final ColourRepo colourRepo;
     private final DiscountRepo discountRepo;
@@ -34,48 +39,61 @@ public class ProductImpl implements ProductInter {
     private final StoreRepo storeRepo;
 
     @Override
-    public void create(ProductDto productDto) {
+    public void create(ProductResp productResp) {
         log.info("Create.service started");
-//        Optional<Price> existingPrice = priceRepo.findById(productDto.getPriceId());
-//        Price price = existingPrice.orElseThrow(() ->
-//                new IllegalArgumentException("Price not found for ID: " + productDto.getPriceId()));
-//        List<Category> categoryList = categoryRepo.findAllById(productDto.getCategoryIds());
-//        Optional<Discount> existingDiscount = discountRepo.findById(productDto.getDiscountId());
-//        Discount discount = existingDiscount.orElseThrow(() ->
-//                new IllegalArgumentException("Discount not found for ID: " + productDto.getDiscountId()));
-//
-//
-//
-//        Optional<Gender> existingGender = genderRepo.findById(productDto.getGenderId());
-//        Gender gender = existingGender.orElseThrow(() ->
-//                new IllegalArgumentException("Gender not found for ID: " + productDto.getGenderId()));
-//
-//
-//        List<Colour> colourList = colourRepo.findAllById(productDto.getColourIds());
-//        List<FeedBack> feedBackList = feedBackRepo.findAllById(productDto.getFeedIds());
-//        List<FileData> fileList = fileDataRepo.findAllById(productDto.getFileIds());
-//        List<ImageData> imageDataList = imageRepo.findAllById(productDto.getImageIds());
-//        List<Size> sizeList = sizeRepo.findAllById(productDto.getSizeIds());
-//        List<Store> storeList = storeRepo.findAllById(productDto.getStoreIds());
-//
-//        Product product = Product.builder()
-//                .productName(productDto.getProductName())
-//                .description(productDto.getDescription())
-//                .isActivated(true)
-//                .isDeleted(false)
-//                .categoryList(categoryList)
-//                .colourList(colourList)
-//                .discount(discount)
-//                .feedBackList(feedBackList)
-//                .fileData(fileList)
-//                .gender(gender)
-//                .imageDataList(imageDataList)
-//                .price(price)
-//                .sizeList(sizeList)
-//                .storeList(storeList)
-//                .build();
-//
-//        productRepo.save(product);
+
+        Price price = priceRepo.findById(productResp.getPriceId()).orElseThrow(null);
+
+        Discount discount = discountRepo.findById(productResp.getDiscountId()).orElseThrow(null);
+
+        Gender gender = genderRepo.findById(productResp.getGenderId()).orElseThrow(null);
+
+        List<Category> categories = productResp.getCategoryIds().stream()
+                .map(categoryId -> categoryRepo.findById(categoryId).orElseThrow())
+                .collect(Collectors.toList());
+
+        List<FeedBack> feedBacks = productResp.getFeedIds().stream()
+                .map(feedId -> feedBackRepo.findById(feedId).orElseThrow())
+                .collect(Collectors.toList());
+
+        List<Colour> colours = productResp.getColourIds().stream()
+                .map(colourId -> colourRepo.findById(colourId).orElseThrow())
+                .collect(Collectors.toList());
+
+        List<FileData> fileDataList = productResp.getFileIds().stream()
+                .map(fileId -> fileDataRepo.findById(fileId).orElseThrow())
+                .collect(Collectors.toList());
+
+        List<ImageData> imageDataList = productResp.getImageIds().stream()
+                .map(imageId -> imageRepo.findById(imageId).orElseThrow())
+                .collect(Collectors.toList());
+
+        List<Store> stores = productResp.getStoreIds().stream()
+                .map(storeId -> storeRepo.findById(storeId).orElseThrow())
+                .collect(Collectors.toList());
+
+        List<Size> sizes = productResp.getSizeIds().stream()
+                .map(sizeId -> sizeRepo.findById(sizeId).orElseThrow())
+                .collect(Collectors.toList());
+
+        Product product = Product.builder()
+                .productName(productResp.getProductName())
+                .description(productResp.getDescription())
+                .isActivated(true)
+                .isDeleted(false)
+                .categoryList(categories)
+                .colourList(colours)
+                .discount(discount)
+                .feedBackList(feedBacks)
+                .fileData(fileDataList)
+                .gender(gender)
+                .imageDataList(imageDataList)
+                .price(price)
+                .sizeList(sizes)
+                .storeList(stores)
+                .build();
+
+        productRepo.save(product);
         log.info("Created.service success");
 
     }
@@ -118,21 +136,46 @@ public class ProductImpl implements ProductInter {
         log.info("Delete.service success");
     }
 
+
     @Override
     @Transactional
-    public Product update(ProductDto productDto, long id) {
+    public Product update(ProductResp productResp, long id) {
         log.info("Update.service started");
-        Optional<Product> updateP = productRepo.findById(id);
-        if (updateP.isPresent()) {
-            Product newProduct = updateP.get();
 
-            newProduct.setDescription(productDto.getDescription());
-            newProduct.setProductName(productDto.getProductName());
+        Product existingProduct = productRepo.findById(id)
+                .orElseThrow(() -> new ProductException(ErrorCodeEnum.PRODUCT_NOT_FOUND));
+        existingProduct.setProductName(productResp.getProductName());
+        existingProduct.setDescription(productResp.getDescription());
 
-            return productRepo.save(newProduct);
+        if (productResp.getPriceId() != null) {
+            Price price = priceRepo.findById(productResp.getPriceId())
+                    .orElseThrow(() ->
+                            new IllegalArgumentException("Price not found for ID: " + productResp.getPriceId()));
+            existingProduct.setPrice(price);
         }
+
+        if (productResp.getDiscountId() != null) {
+            Discount discount = discountRepo.findById(productResp.getDiscountId())
+                    .orElseThrow(() ->
+                            new IllegalArgumentException("Discount not found for ID: " + productResp.getDiscountId()));
+            existingProduct.setDiscount(discount);
+        }
+
+        if (productResp.getDiscountId() != null) {
+            Gender gender = genderRepo.findById(productResp.getGenderId())
+                    .orElseThrow(() ->
+                            new IllegalArgumentException("Gender not found for ID: " + productResp.getGenderId()));
+            existingProduct.setGender(gender);
+        }
+
+
+        if (productResp.getSizeIds() != null && !productResp.getSizeIds().isEmpty()) {
+            List<Size> sizes = sizeRepo.findAllById(productResp.getSizeIds());
+            existingProduct.setSizeList(sizes);
+        }
+
         log.info("Update.service success");
-        throw new ProductException(ErrorCodeEnum.NOT_ENOUGH_PRODUCT);
+       return productRepo.save(existingProduct);
 
     }
 }

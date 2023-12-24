@@ -13,19 +13,18 @@ import java.util.List;
 @Table
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    long categoryId;
-    String name;
+    private Long categoryId;
+    private String name;
     @OneToMany
-    List<Category> subCategory;
+    private List<Category> subCategory;
 
     @ManyToMany(mappedBy = "categoryList")
-    List<Product> productList;
+    private List<Product> productList;
 
 
 

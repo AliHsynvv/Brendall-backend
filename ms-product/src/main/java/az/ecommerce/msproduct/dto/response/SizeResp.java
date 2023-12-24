@@ -7,9 +7,9 @@ import java.time.LocalDateTime;
 @Data
 public class SizeResp {
 
-    long sizeId;
+    Long sizeId;
     String sizeName;
-    long productId;
+    Long productId;
     LocalDateTime responseAt;
 
 

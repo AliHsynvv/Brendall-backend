@@ -13,15 +13,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Discount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long discountId;
-    BigDecimal percentage;
-    LocalDateTime startDate;
-    LocalDateTime endDate;
+    private Long discountId;
+    private BigDecimal percentage;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 
     @OneToOne(mappedBy = "discount")
-    Product product;
+    private Product product;
 }

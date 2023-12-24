@@ -10,16 +10,14 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@FieldDefaults(level = AccessLevel.PRIVATE)
-
 public class Size {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long sizeId;
-    String sizeName;
+    private Long sizeId;
+    private String sizeName;
 
     @ManyToOne
-    Product product;
+    private Product product;
 
 
 }

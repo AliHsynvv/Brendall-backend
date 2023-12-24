@@ -10,15 +10,14 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Colour {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long colourId;
-    String colourName;
+    private Long colourId;
+    private String colourName;
 
     @ManyToOne
-    Product product;
+    private Product product;
 
 }

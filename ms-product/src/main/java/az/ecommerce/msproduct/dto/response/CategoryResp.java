@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 public class CategoryResp {
 
-    long id;
+    Long id;
     String name;
     List<Category> subCategory;
     List<Long> productIds;

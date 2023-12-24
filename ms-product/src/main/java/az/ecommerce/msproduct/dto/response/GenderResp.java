@@ -9,8 +9,8 @@ import java.util.List;
 @Data
 public class GenderResp {
 
-    long id;
-    String name;
+    Long genderId;
+    String genderName;
     List<Long> productIds;
     LocalDateTime responseAt;
 }

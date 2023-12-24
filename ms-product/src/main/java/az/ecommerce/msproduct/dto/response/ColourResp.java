@@ -7,9 +7,9 @@ import java.time.LocalDateTime;
 @Data
 public class ColourResp {
 
-    long colourId;
+    Long colourId;
     String colourName;
-    long productId;
+    Long productId;
     LocalDateTime responseAt;
 
 

@@ -16,7 +16,7 @@ public class ProductDto {
     List<ColourDto> colourList;
     PriceDto price;
     DiscountDto discount;
-    List<FeedBackDto> feedIds;
+    List<FeedBackDto> feedList;
     List<SizeDto> sizeList;
     List<Store> storeList;
     GenderDto gender;
