@@ -36,46 +36,46 @@ public class ProductImpl implements ProductInter {
     @Override
     public void create(ProductDto productDto) {
         log.info("Create.service started");
-        Optional<Price> existingPrice = priceRepo.findById(productDto.getPriceId());
-        Price price = existingPrice.orElseThrow(() ->
-                new IllegalArgumentException("Price not found for ID: " + productDto.getPriceId()));
-        List<Category> categoryList = categoryRepo.findAllById(productDto.getCategoryIds());
-        Optional<Discount> existingDiscount = discountRepo.findById(productDto.getDiscountId());
-        Discount discount = existingDiscount.orElseThrow(() ->
-                new IllegalArgumentException("Discount not found for ID: " + productDto.getDiscountId()));
-
-
-
-        Optional<Gender> existingGender = genderRepo.findById(productDto.getGenderId());
-        Gender gender = existingGender.orElseThrow(() ->
-                new IllegalArgumentException("Gender not found for ID: " + productDto.getGenderId()));
-
-
-        List<Colour> colourList = colourRepo.findAllById(productDto.getColourIds());
-        List<FeedBack> feedBackList = feedBackRepo.findAllById(productDto.getFeedIds());
-        List<FileData> fileList = fileDataRepo.findAllById(productDto.getFileIds());
-        List<ImageData> imageDataList = imageRepo.findAllById(productDto.getImageIds());
-        List<Size> sizeList = sizeRepo.findAllById(productDto.getSizeIds());
-        List<Store> storeList = storeRepo.findAllById(productDto.getStoreIds());
-
-        Product product = Product.builder()
-                .productName(productDto.getProductName())
-                .description(productDto.getDescription())
-                .isActivated(true)
-                .isDeleted(false)
-                .categoryList(categoryList)
-                .colourList(colourList)
-                .discount(discount)
-                .feedBackList(feedBackList)
-                .fileData(fileList)
-                .gender(gender)
-                .imageDataList(imageDataList)
-                .price(price)
-                .sizeList(sizeList)
-                .storeList(storeList)
-                .build();
-
-        productRepo.save(product);
+//        Optional<Price> existingPrice = priceRepo.findById(productDto.getPriceId());
+//        Price price = existingPrice.orElseThrow(() ->
+//                new IllegalArgumentException("Price not found for ID: " + productDto.getPriceId()));
+//        List<Category> categoryList = categoryRepo.findAllById(productDto.getCategoryIds());
+//        Optional<Discount> existingDiscount = discountRepo.findById(productDto.getDiscountId());
+//        Discount discount = existingDiscount.orElseThrow(() ->
+//                new IllegalArgumentException("Discount not found for ID: " + productDto.getDiscountId()));
+//
+//
+//
+//        Optional<Gender> existingGender = genderRepo.findById(productDto.getGenderId());
+//        Gender gender = existingGender.orElseThrow(() ->
+//                new IllegalArgumentException("Gender not found for ID: " + productDto.getGenderId()));
+//
+//
+//        List<Colour> colourList = colourRepo.findAllById(productDto.getColourIds());
+//        List<FeedBack> feedBackList = feedBackRepo.findAllById(productDto.getFeedIds());
+//        List<FileData> fileList = fileDataRepo.findAllById(productDto.getFileIds());
+//        List<ImageData> imageDataList = imageRepo.findAllById(productDto.getImageIds());
+//        List<Size> sizeList = sizeRepo.findAllById(productDto.getSizeIds());
+//        List<Store> storeList = storeRepo.findAllById(productDto.getStoreIds());
+//
+//        Product product = Product.builder()
+//                .productName(productDto.getProductName())
+//                .description(productDto.getDescription())
+//                .isActivated(true)
+//                .isDeleted(false)
+//                .categoryList(categoryList)
+//                .colourList(colourList)
+//                .discount(discount)
+//                .feedBackList(feedBackList)
+//                .fileData(fileList)
+//                .gender(gender)
+//                .imageDataList(imageDataList)
+//                .price(price)
+//                .sizeList(sizeList)
+//                .storeList(storeList)
+//                .build();
+//
+//        productRepo.save(product);
         log.info("Created.service success");
 
     }

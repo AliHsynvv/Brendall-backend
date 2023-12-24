@@ -22,7 +22,8 @@ public class Store {
     String storeName;
     @OneToOne
     FileData storeIcon;
-    @ManyToMany(mappedBy = "storeList")
+
+    @ManyToMany
     List<Product> productList;
 
     @OneToMany(targetEntity = Location.class,cascade = CascadeType.ALL)
