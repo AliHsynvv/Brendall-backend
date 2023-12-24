@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 public class LocationDto {
 
-    long locationId;
+    Long locationId;
     double latitude;
     double longitude;
-    long storeId;
+    Long storeId;
 }

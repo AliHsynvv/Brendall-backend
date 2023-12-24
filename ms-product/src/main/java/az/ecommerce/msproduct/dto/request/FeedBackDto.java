@@ -5,9 +5,9 @@ import lombok.*;
 @Data
 public class FeedBackDto {
 
-    long feedId;
+    Long feedId;
     double feedRank;
-    long productId;
+    Long productId;
 
 
 }

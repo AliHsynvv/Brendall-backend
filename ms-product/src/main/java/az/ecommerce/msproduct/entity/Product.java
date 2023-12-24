@@ -19,15 +19,18 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long productId;
+    Long productId;
     String productName;
     @NotBlank(message = "description cannot be empty")
     String description;
     boolean isActivated;
     boolean isDeleted;
 
-    @OneToMany(targetEntity = Colour.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "colourr_id",referencedColumnName = "productId")
+    @OneToMany
+    @JoinTable(
+            name = "colour_id",
+            joinColumns = @JoinColumn(name = "productId"),
+            inverseJoinColumns = @JoinColumn(name = "colourId"))
     List<Colour> colourList;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -53,8 +56,11 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "categoryId"))
     List<Category> categoryList;
 
-    @OneToMany(targetEntity = Size.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "siz_id",referencedColumnName = "productId")
+    @OneToMany
+    @JoinTable(
+            name = "size_id",
+            joinColumns = @JoinColumn(name = "productId"),
+            inverseJoinColumns = @JoinColumn(name = "sizeId"))
     List<Size> sizeList;
 
     @ManyToMany

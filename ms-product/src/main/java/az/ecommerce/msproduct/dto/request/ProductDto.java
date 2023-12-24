@@ -8,19 +8,19 @@ import java.util.List;
 @Data
 public class ProductDto {
 
-    long productId;
+    Long productId;
     String productName;
     String description;
     boolean isActivated;
     boolean isDeleted;
-    List<Long> colourIds;
-    long priceId;
-    long discountId;
-    List<Long> feedIds;
-    List<Long> sizeIds;
-    List<Long> storeIds;
-    long genderId;
-    List<Long> categoryIds;
+    List<ColourDto> colourList;
+    PriceDto price;
+    DiscountDto discount;
+    List<FeedBackDto> feedIds;
+    List<SizeDto> sizeList;
+    List<Store> storeList;
+    GenderDto gender;
+    List<CategoryDto> categoryList;
     List<Long> imageIds;
     List<Long> fileIds;
 

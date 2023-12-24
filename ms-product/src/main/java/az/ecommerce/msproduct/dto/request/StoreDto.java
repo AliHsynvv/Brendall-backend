@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 public class StoreDto {
 
-    long storeId;
+    Long storeId;
     String storeName;
     FileData storeIcon;
     List<Long> productIds;

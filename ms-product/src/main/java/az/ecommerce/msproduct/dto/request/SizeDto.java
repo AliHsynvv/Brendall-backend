@@ -6,9 +6,9 @@ import lombok.*;
 @Data
 public class SizeDto {
 
-    long sizeId;
+   Long sizeId;
     String sizeName;
-    long productId;
+    Long productId;
 
 
 }

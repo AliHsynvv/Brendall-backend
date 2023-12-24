@@ -6,9 +6,9 @@ import lombok.*;
 @Data
 public class ColourDto {
 
-    long colourId;
+    Long colourId;
     String colourName;
-    long productId;
+    Long productId;
 
 
 }
