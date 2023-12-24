@@ -11,19 +11,19 @@ import java.util.List;
 @Builder
 public class ProductResp {
 
-    long productId;
+    Long productId;
     String productName;
     String description;
     boolean isActivated;
     boolean isDeleted;
     List<Long> colourIds;
-    long priceId;
-    long discountId;
+    Long priceId;
+    Long discountId;
     List<Long> feedIds;
     List<Long> sizeIds;
     List<Long> storeIds;
-    long genderId;
-    long categoryId;
+    Long genderId;
+    List<Long> categoryIds;
     List<Long> imageIds;
     List<Long> fileIds;
     LocalDateTime responseAt;

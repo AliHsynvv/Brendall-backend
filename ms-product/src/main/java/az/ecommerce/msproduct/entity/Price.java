@@ -13,15 +13,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Price {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long priceId;
-    BigDecimal amount;
-    LocalDateTime startDate;
-    LocalDateTime endDate;
+    private Long priceId;
+    private BigDecimal amount;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 
     @OneToOne(mappedBy = "price")
-    Product product;
+    private Product product;
 }

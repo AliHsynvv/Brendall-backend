@@ -26,5 +26,5 @@ public class ImageData {
     private byte[] imageData;
 
     @ManyToOne
-    Product product;
+    private   Product product;
 }

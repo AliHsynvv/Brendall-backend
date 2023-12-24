@@ -12,18 +12,17 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class FeedBack {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long feedId;
+    private Long feedId;
 
     @Min(value = 1)
     @Max(value = 5)
-    double feedRank;
+    private double feedRank;
 
     @ManyToOne
-    Product product;
+    private Product product;
 
 
 }

@@ -12,16 +12,15 @@ import java.util.List;
 @Table
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Gender {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long genderId;
+    private Long genderId;
 
-    String name;
+    private String name;
 
     @OneToMany(mappedBy = "gender")
-    List<Product> productList;
+    private List<Product> productList;
 }
 
 
