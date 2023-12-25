@@ -85,7 +85,7 @@ public class ProductImpl implements ProductInter {
                 .colourList(colours)
                 .discount(discount)
                 .feedBackList(feedBacks)
-                .fileData(fileDataList)
+                .fileDataList(fileDataList)
                 .gender(gender)
                 .imageDataList(imageDataList)
                 .price(price)

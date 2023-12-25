@@ -3,6 +3,7 @@ package az.ecommerce.msproduct.dto.request;
 import az.ecommerce.msproduct.entity.*;
 import lombok.*;
 
+import java.io.File;
 import java.util.List;
 
 @Data
@@ -16,13 +17,13 @@ public class ProductDto {
     List<ColourDto> colourList;
     PriceDto price;
     DiscountDto discount;
-    List<FeedBackDto> feedList;
+    List<FeedBackDto> feedBackList;
     List<SizeDto> sizeList;
     List<Store> storeList;
     GenderDto gender;
     List<CategoryDto> categoryList;
-    List<Long> imageIds;
-    List<Long> fileIds;
+    List<ImageDataDto> imageDataList;
+    List<FileDataDto> fileDataList;
 
 
 }

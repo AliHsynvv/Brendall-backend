@@ -32,20 +32,20 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "colourId"))
     private List<Colour> colourList;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "price_id")
     private Price price;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "discount_id")
     private Discount discount;
 
-    @OneToMany(targetEntity = FeedBack.class, cascade = CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name = "feedd_id", referencedColumnName = "productId")
     private List<FeedBack> feedBackList;
 
     @ManyToOne
-    @JoinTable(name = "genderId")
+    @JoinColumn(name = "gender_id")
     private Gender gender;
 
     @ManyToMany
@@ -69,9 +69,9 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "storeId"))
     private List<Store> storeList;
 
-    @OneToMany(targetEntity = FileData.class, cascade = CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name = "file_id", referencedColumnName = "productId")
-    private List<FileData> fileData;
+    private List<FileData> fileDataList;
 
     @OneToMany(targetEntity = ImageData.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "image_id", referencedColumnName = "productId")

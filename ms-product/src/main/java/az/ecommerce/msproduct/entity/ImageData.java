@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class ImageData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long imageDataId;
 
     private String name;
     private String type;
