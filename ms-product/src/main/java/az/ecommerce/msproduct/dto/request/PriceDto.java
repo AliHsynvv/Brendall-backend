@@ -13,5 +13,5 @@ public class PriceDto {
     BigDecimal amount;
     LocalDateTime startDate;
     LocalDateTime endDate;
-   Long productId;
+     Long productId;
 }

@@ -16,7 +16,7 @@ public class FileData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long fileDataId;
 
     private String name;
     private String type;

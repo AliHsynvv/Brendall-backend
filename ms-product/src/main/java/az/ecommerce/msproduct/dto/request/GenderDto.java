@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 public class GenderDto {
 
-    Long id;
+    Long genderId;
     String name;
     List<Long> productIds;
 

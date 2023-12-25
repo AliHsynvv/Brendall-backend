@@ -8,7 +8,7 @@ public class ColourDto {
 
     Long colourId;
     String colourName;
-    Long productId;
+    ProductDto product;
 
 
 }
