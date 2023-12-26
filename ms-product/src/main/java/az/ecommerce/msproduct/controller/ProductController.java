@@ -39,8 +39,8 @@ public class ProductController {
     }
 
     @PutMapping("/update/{id}")
-    public Product update(@RequestBody ProductResp productResp, @PathVariable long id){
-       return productInter.update(productResp,id);
+    public void update(@RequestBody ProductResp productResp, @PathVariable long id){
+        productInter.update(productResp,id);
 
     }
 

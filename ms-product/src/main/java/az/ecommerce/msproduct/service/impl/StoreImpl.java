@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class StoreImpl implements StoreInter {
-    private final ProductRepo productRepo;
+
     private final StoreRepo storeRepo;
     private final ModelMapper modelMapper;
 

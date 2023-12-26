@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class SizeImpl implements SizeInter {
-    private final ProductRepo productRepo;
+
     private final SizeRepo sizeRepo;
     private final ModelMapper modelMapper;
 

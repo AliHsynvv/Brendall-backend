@@ -18,6 +18,6 @@ public interface ProductInter {
 
     void delete(long id);
 
-    Product update(ProductResp productResp, long id);
+    void update(ProductResp productResp, long id);
 
 }
