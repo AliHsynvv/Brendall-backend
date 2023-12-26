@@ -174,6 +174,34 @@ public class ProductImpl implements ProductInter {
             existingProduct.setSizeList(sizes);
         }
 
+        if (productResp.getColourIds() != null && !productResp.getColourIds().isEmpty()) {
+            List<Colour> colours = colourRepo.findAllById(productResp.getColourIds());
+            existingProduct.setColourList(colours);
+        }
+        if (productResp.getCategoryIds() != null && !productResp.getCategoryIds().isEmpty()) {
+            List<Category> categories = categoryRepo.findAllById(productResp.getCategoryIds());
+            existingProduct.setCategoryList(categories);
+        }
+
+        if (productResp.getFeedIds() != null && !productResp.getFeedIds().isEmpty()) {
+            List<FeedBack> feedBacks = feedBackRepo.findAllById(productResp.getFeedIds());
+            existingProduct.setFeedBackList(feedBacks);
+        }
+        if (productResp.getFileIds() != null && !productResp.getFileIds().isEmpty()) {
+            List<FileData> fileDataList = fileDataRepo.findAllById(productResp.getFileIds());
+            existingProduct.setFileDataList(fileDataList);
+        }
+        if (productResp.getImageIds() != null && !productResp.getImageIds().isEmpty()) {
+            List<ImageData> imageDataList = imageRepo.findAllById(productResp.getImageIds());
+            existingProduct.setImageDataList(imageDataList);
+        }
+
+        if (productResp.getStoreIds() != null && !productResp.getStoreIds().isEmpty()) {
+            List<Store> stores = storeRepo.findAllById(productResp.getStoreIds());
+            existingProduct.setStoreList(stores);
+        }
+
+
         log.info("Update.service success");
         productRepo.save(existingProduct);
 

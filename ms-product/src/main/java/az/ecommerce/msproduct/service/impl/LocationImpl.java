@@ -78,7 +78,7 @@ public class LocationImpl implements LocationInter {
 
     @Override
     @Transactional
-    public Location update(LocationDto locationDto, long id) {
+    public void update(LocationDto locationDto, long id) {
         log.info("Update service started");
 
         Optional<Location> updateL = locationRepo.findById(id);
@@ -87,9 +87,9 @@ public class LocationImpl implements LocationInter {
             newLocation.setLatitude(locationDto.getLatitude());
             newLocation.setLongitude(locationDto.getLongitude());
 
-            return locationRepo.save(newLocation);
+             locationRepo.save(newLocation);
         }
         log.info("Update.service success");
-        throw new LocationException(ErrorCodeEnum.NOT_ENOUGH_LOCATION);
+
     }
 }

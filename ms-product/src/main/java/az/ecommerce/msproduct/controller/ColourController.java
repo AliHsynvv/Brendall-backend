@@ -38,7 +38,7 @@ public class ColourController {
     }
 
     @PutMapping("/update/{id}")
-    public Colour update(@RequestBody ColourDto colourDto, @PathVariable long id) {
-        return colourInter.update(colourDto, id);
+    public void update(@RequestBody ColourDto colourDto, @PathVariable long id) {
+         colourInter.update(colourDto, id);
     }
 }

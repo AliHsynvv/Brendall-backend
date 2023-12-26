@@ -37,8 +37,8 @@ public class GenderController {
     }
 
     @PutMapping("/update/{id}")
-    public Gender update(@RequestBody GenderDto genderDto, @PathVariable long id) {
-        return genderInter.update(genderDto, id);
+    public void update(@RequestBody GenderDto genderDto, @PathVariable long id) {
+         genderInter.update(genderDto, id);
     }
 
 }

@@ -12,5 +12,5 @@ public interface CategoryInter {
     CategoryDto findById(long id);
     List<CategoryDto> getAllCategories();
     void delete(long id);
-    Category update(CategoryDto categoryDto, long id);
+    void update(CategoryDto categoryDto, long id);
 }

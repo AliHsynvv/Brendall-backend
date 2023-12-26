@@ -37,7 +37,7 @@ private final LocationInter locationInter;
     }
 
     @PutMapping("/update/{id}")
-    public Location update(@RequestBody LocationDto locationDto, @PathVariable long id) {
-        return locationInter.update(locationDto, id);
+    public void update(@RequestBody LocationDto locationDto, @PathVariable long id) {
+         locationInter.update(locationDto, id);
     }
 }

@@ -38,7 +38,7 @@ public class PriceController {
     }
 
     @PutMapping("/update/{id}")
-    public Price update(@RequestBody PriceDto priceDto, @PathVariable long id) {
-        return priceInter.update(priceDto, id);
+    public void update(@RequestBody PriceDto priceDto, @PathVariable long id) {
+         priceInter.update(priceDto, id);
     }
 }

@@ -13,6 +13,6 @@ public interface PriceInter {
     PriceDto findById(long id);
     List<PriceDto> getAllPrices();
     void delete(long id);
-    Price update(PriceDto priceDto, long id);
+    void update(PriceDto priceDto, long id);
 
 }

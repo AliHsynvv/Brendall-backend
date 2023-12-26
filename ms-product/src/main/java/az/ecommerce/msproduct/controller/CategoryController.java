@@ -37,7 +37,7 @@ public class CategoryController {
     }
 
     @PutMapping("/update/{id}")
-    public Category update(@RequestBody CategoryDto categoryDto, @PathVariable long id) {
-        return categoryInter.update(categoryDto, id);
+    public void update(@RequestBody CategoryDto categoryDto, @PathVariable long id) {
+         categoryInter.update(categoryDto, id);
     }
 }
