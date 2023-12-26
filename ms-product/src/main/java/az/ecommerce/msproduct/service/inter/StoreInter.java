@@ -15,5 +15,5 @@ public interface StoreInter {
     StoreDto findById(long id);
     List<StoreDto> getAllStores();
     void delete(long id);
-    Store update(StoreDto storeDto, long id);
+    void update(StoreDto storeDto, long id);
 }

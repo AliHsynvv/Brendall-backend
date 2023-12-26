@@ -77,7 +77,7 @@ public class DiscountImpl implements DiscountInter {
 
     @Override
     @Transactional
-    public Discount update(DiscountDto discountDto, long id) {
+    public void update(DiscountDto discountDto, long id) {
         log.info("Update.service started");
         Optional<Discount> updateD = discountRepo.findById(id);
         if (updateD.isPresent()) {
@@ -86,9 +86,9 @@ public class DiscountImpl implements DiscountInter {
             newDiscount.setStartDate(discountDto.getStartDate());
             newDiscount.setEndDate(discountDto.getEndDate());
 
-            return discountRepo.save(newDiscount);
+             discountRepo.save(newDiscount);
         }
         log.info("Update.service success");
-        throw new DiscountException(ErrorCodeEnum.NOT_ENOUGH_DISCOUNT);
+
     }
 }

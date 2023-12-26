@@ -12,5 +12,5 @@ public interface DiscountInter {
     DiscountDto findById(long id);
     List<DiscountDto> getAllDiscounts();
     void delete(long id);
-    Discount update(DiscountDto discountDto,long id);
+    void update(DiscountDto discountDto,long id);
 }

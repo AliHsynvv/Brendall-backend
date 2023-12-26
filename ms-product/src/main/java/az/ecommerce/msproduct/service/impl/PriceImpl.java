@@ -82,7 +82,7 @@ public class PriceImpl implements PriceInter {
 
     @Override
     @Transactional
-    public Price update(PriceDto priceDto, long id) {
+    public void update(PriceDto priceDto, long id) {
         log.info("Update.service started");
        Optional<Price> updateP = priceRepo.findById(id);
        if (updateP.isPresent()) {
@@ -90,10 +90,10 @@ public class PriceImpl implements PriceInter {
            newPrice.setAmount(priceDto.getAmount());
            newPrice.setStartDate(priceDto.getStartDate());
            newPrice.setEndDate(priceDto.getEndDate());
-           return priceRepo.save(newPrice);
+            priceRepo.save(newPrice);
        }
         log.info("Update.service success");
 
-        throw new PriceException(ErrorCodeEnum.NOT_ENOUGH_PRICE);
+
     }
 }

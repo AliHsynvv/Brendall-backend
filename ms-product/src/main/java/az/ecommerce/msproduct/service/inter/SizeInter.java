@@ -14,5 +14,5 @@ public interface SizeInter {
     SizeDto findById(long id);
     List<SizeDto> getAllSizes();
     void delete(long id);
-    Size update(SizeDto sizeDto, long id);
+    void update(SizeDto sizeDto, long id);
 }

@@ -41,7 +41,7 @@ public class StoreController {
     }
 
     @PutMapping("/update/{id}")
-    public Store update(@RequestBody StoreDto storeDto, @PathVariable long id) {
-        return storeInter.update(storeDto, id);
+    public void update(@RequestBody StoreDto storeDto, @PathVariable long id) {
+         storeInter.update(storeDto, id);
     }
 }

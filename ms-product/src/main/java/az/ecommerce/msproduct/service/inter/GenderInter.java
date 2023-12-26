@@ -12,6 +12,6 @@ public interface GenderInter {
     GenderDto findById(long id);
     List<GenderDto> getAllGenders();
     void delete(long id);
-    Gender update(GenderDto genderDto,long id);
+    void update(GenderDto genderDto,long id);
 }
 

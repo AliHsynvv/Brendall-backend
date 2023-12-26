@@ -76,16 +76,15 @@ public class SizeImpl implements SizeInter {
 
     @Override
     @Transactional
-    public Size update(SizeDto sizeDto, long id) {
+    public void update(SizeDto sizeDto, long id) {
         log.info("Update service started");
         Optional<Size> updateS = sizeRepo.findById(id);
         if (updateS.isPresent()) {
             Size newSize = updateS.get();
             newSize.setSizeName(sizeDto.getSizeName());
-
-            return sizeRepo.save(newSize);
+            sizeRepo.save(newSize);
         }
         log.info("Update.service success");
-        throw new SizeException(ErrorCodeEnum.NOT_ENOUGH_SIZE);
+
     }
 }

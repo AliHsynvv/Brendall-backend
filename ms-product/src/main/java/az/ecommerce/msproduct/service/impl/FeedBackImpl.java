@@ -76,15 +76,15 @@ public class FeedBackImpl implements FeedBackInter {
 
     @Override
     @Transactional
-    public FeedBack update(FeedBackDto feedBackDto, long id) {
+    public void update(FeedBackDto feedBackDto, long id) {
         log.info("Update.service started");
         Optional<FeedBack> updateF = feedBackRepo.findById(id);
         if (updateF.isPresent()){
             FeedBack newFeedBack = updateF.get();
             newFeedBack.setFeedRank(feedBackDto.getFeedRank());
-            return feedBackRepo.save(newFeedBack);
+             feedBackRepo.save(newFeedBack);
         }
         log.info("Update.service success");
-        throw new FeedBackException(ErrorCodeEnum.NOT_ENOUGH_FEEDBACK);
+
     }
 }

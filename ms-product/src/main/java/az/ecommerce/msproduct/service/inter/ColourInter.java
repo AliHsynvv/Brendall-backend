@@ -12,6 +12,6 @@ public interface ColourInter {
     ColourDto findById(long id);
     List<ColourDto> getAllColours();
     void delete(long id);
-    Colour update(ColourDto colourDto, long id);
+    void update(ColourDto colourDto, long id);
 
 }

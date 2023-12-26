@@ -3,7 +3,6 @@ package az.ecommerce.msproduct.entity;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.FieldDefaults;
 
 import java.util.List;
 
@@ -27,9 +26,7 @@ public class Category {
     private List<Product> productList;
 
     @Nullable
-    long parentId;
-
-
+    private Long parentId;
 
 
 }

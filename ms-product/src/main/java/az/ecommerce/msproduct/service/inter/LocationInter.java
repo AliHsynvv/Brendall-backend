@@ -14,6 +14,6 @@ public interface LocationInter {
     List<LocationDto> getAllLocations();
     void delete(long id);
 
-    Location update(LocationDto locationDto, long id);
+    void update(LocationDto locationDto, long id);
 
 }
