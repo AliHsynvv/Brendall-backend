@@ -139,7 +139,7 @@ public class ProductImpl implements ProductInter {
 
     @Override
     @Transactional
-    public Product update(ProductResp productResp, long id) {
+    public void update(ProductResp productResp, long id) {
         log.info("Update.service started");
 
         Product existingProduct = productRepo.findById(id)
@@ -175,7 +175,7 @@ public class ProductImpl implements ProductInter {
         }
 
         log.info("Update.service success");
-       return productRepo.save(existingProduct);
+        productRepo.save(existingProduct);
 
     }
 }
