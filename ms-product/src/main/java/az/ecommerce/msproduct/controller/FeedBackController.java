@@ -40,8 +40,8 @@ public class FeedBackController {
     }
 
     @PutMapping("/update/{id}")
-    public FeedBack update(@RequestBody FeedBackDto feedBackDto, @PathVariable long id) {
-        return feedBackInter.update(feedBackDto, id);
+    public void update(@RequestBody FeedBackDto feedBackDto, @PathVariable long id) {
+        feedBackInter.update(feedBackDto, id);
 
     }
 

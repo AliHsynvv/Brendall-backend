@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 @Data
 public class DiscountDto {
 
-    long discountId;
+    Long discountId;
     BigDecimal percentage;
     LocalDateTime startDate;
     LocalDateTime endDate;
-    long productId;
+    Long productId;
 }

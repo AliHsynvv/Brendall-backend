@@ -12,21 +12,20 @@ import java.util.logging.Level;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class FileData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    private Long fileDataId;
 
-    String name;
-    String type;
-    String filePath;
+    private String name;
+    private String type;
+    private String filePath;
 
     @ManyToOne
-    Product product;
+    private Product product;
 
     @OneToOne
-    Store store;
+    private Store store;
 
 }

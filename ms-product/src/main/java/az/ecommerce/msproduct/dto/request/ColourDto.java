@@ -8,10 +8,14 @@ import java.util.List;
 @Data
 public class ColourDto {
 
-    long colourId;
+    Long colourId;
     String colourName;
+<<<<<<< HEAD
     List<Long> productIds;
 
+=======
+    ProductDto product;
+>>>>>>> origin/Qiyas
 
 
 }

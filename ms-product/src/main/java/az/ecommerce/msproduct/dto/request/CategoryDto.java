@@ -10,9 +10,11 @@ import java.util.List;
 @Data
 public class CategoryDto {
 
-    long id;
+    Long categoryId;
     String name;
     List<Category> subCategory;
+    Long parentId;
     List<Long> productIds;
+
 
 }

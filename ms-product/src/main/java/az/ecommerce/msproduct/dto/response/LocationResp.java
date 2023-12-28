@@ -8,9 +8,9 @@ import java.time.LocalDateTime;
 public class LocationResp {
 
 
-    long locationId;
+    Long locationId;
     double latitude;
     double longitude;
-    long storeId;
+    Long storeId;
     LocalDateTime responseAt;
 }

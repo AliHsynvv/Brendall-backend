@@ -8,9 +8,13 @@ import java.util.List;
 @Data
 public class SizeDto {
 
-    long sizeId;
+    Long sizeId;
     String sizeName;
+<<<<<<< HEAD
     List<Long> productIds;
+=======
+    Long productId;
+>>>>>>> origin/Qiyas
 
 
 }

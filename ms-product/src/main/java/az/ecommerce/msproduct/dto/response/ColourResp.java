@@ -8,9 +8,13 @@ import java.util.List;
 @Data
 public class ColourResp {
 
-    long colourId;
+    Long colourId;
     String colourName;
+<<<<<<< HEAD
     List<Long> productIds;
+=======
+    Long productId;
+>>>>>>> origin/Qiyas
     LocalDateTime responseAt;
 
 

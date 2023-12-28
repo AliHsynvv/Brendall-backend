@@ -12,16 +12,19 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@FieldDefaults(level = AccessLevel.PRIVATE)
-
 public class Size {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long sizeId;
-    String sizeName;
+    private Long sizeId;
+    private String sizeName;
 
+<<<<<<< HEAD
     @ManyToMany
     List<Product> productList;
+=======
+    @ManyToOne
+    private Product product;
+>>>>>>> origin/Qiyas
 
 
 }

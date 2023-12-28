@@ -37,7 +37,7 @@ public class SizeController {
     }
 
     @PutMapping("/update/{id}")
-    public Size update(@RequestBody SizeDto sizeDto, @PathVariable long id) {
-        return sizeInter.update(sizeDto, id);
+    public void update(@RequestBody SizeDto sizeDto, @PathVariable long id) {
+         sizeInter.update(sizeDto, id);
     }
 }

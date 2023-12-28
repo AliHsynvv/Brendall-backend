@@ -37,7 +37,7 @@ public class DiscountController {
     }
 
     @PutMapping("/update/{id}")
-    public Discount update(@RequestBody DiscountDto discountDto, @PathVariable long id) {
-        return discountInter.update(discountDto, id);
+    public void update(@RequestBody DiscountDto discountDto, @PathVariable long id) {
+         discountInter.update(discountDto, id);
     }
 }

@@ -15,6 +15,6 @@ public interface FeedBackInter {
     FeedBackDto findById(long id);
     List<FeedBackDto> getAllFeedBack();
     void delete(long id);
-    FeedBack update(FeedBackDto feedBackDto, long id);
+    void update(FeedBackDto feedBackDto, long id);
 
 }

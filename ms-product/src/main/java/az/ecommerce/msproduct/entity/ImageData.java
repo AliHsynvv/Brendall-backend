@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class ImageData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long imageDataId;
 
     private String name;
     private String type;
@@ -26,5 +26,5 @@ public class ImageData {
     private byte[] imageData;
 
     @ManyToOne
-    Product product;
+    private   Product product;
 }

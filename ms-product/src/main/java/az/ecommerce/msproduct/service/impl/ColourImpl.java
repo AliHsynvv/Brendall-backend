@@ -76,16 +76,16 @@ public class ColourImpl implements ColourInter {
 
     @Override
     @Transactional
-    public Colour update(ColourDto colourDto, long id) {
+    public void update(ColourDto colourDto, long id) {
         log.info("Update.service started");
         Optional<Colour> updateC = colourRepo.findById(id);
         if (updateC.isPresent()) {
             Colour newColour = updateC.get();
             newColour.setColourName(colourDto.getColourName());
 
-            return colourRepo.save(newColour);
+             colourRepo.save(newColour);
         }
         log.info("Update.service success");
-        throw new ColourException(ErrorCodeEnum.NOT_ENOUGH_COLOUR);
+
     }
 }

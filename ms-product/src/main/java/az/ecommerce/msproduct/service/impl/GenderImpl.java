@@ -76,16 +76,16 @@ public class GenderImpl implements GenderInter {
 
     @Override
     @Transactional
-    public Gender update(GenderDto genderDto, long id) {
+    public void update(GenderDto genderDto, long id) {
         log.info("Update.service started");
         Optional<Gender> updateG = genderRepo.findById(id);
         if (updateG.isPresent()) {
             Gender newGender = updateG.get();
             newGender.setName(genderDto.getName());
 
-            return genderRepo.save(newGender);
+             genderRepo.save(newGender);
         }
         log.info("Update.service success");
-        throw new GenderException(ErrorCodeEnum.NOT_ENOUGH_GENDER);
+
     }
 }

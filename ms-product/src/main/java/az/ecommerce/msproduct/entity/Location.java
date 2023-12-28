@@ -11,18 +11,22 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+<<<<<<< HEAD
     long locationId;
+=======
 
-    double latitude;
-    double longitude;
+    private Long locationId;
+>>>>>>> origin/Qiyas
+
+    private double latitude;
+    private double longitude;
 
     @ManyToOne
-    Store store;
+    private Store store;
 
 
 }

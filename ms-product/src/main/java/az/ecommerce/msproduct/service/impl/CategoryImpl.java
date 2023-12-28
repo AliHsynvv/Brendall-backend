@@ -77,16 +77,16 @@ public class CategoryImpl implements CategoryInter {
 
     @Override
     @Transactional
-    public Category update(CategoryDto categoryDto, long id) {
+    public void update(CategoryDto categoryDto, long id) {
         log.info("Update.service started");
         Optional<Category> updateC = categoryRepo.findById(id);
         if (updateC.isPresent()) {
             Category newCategory = updateC.get();
             newCategory.setName(categoryDto.getName());
 
-            return categoryRepo.save(newCategory);
+             categoryRepo.save(newCategory);
         }
         log.info("Update.service success");
-        throw new CategoryException(ErrorCodeEnum.NOT_ENOUGH_CATEGORY);
+
     }
 }

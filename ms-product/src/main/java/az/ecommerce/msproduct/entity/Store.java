@@ -12,22 +12,22 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Store {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long storeId;
+    private Long storeId;
 
-    String storeName;
+    private String storeName;
     @OneToOne
-    FileData storeIcon;
-    @ManyToMany(mappedBy = "storeList")
-    List<Product> productList;
+    private FileData storeIcon;
 
-    @OneToMany(targetEntity = Location.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "loc_id",referencedColumnName = "StoreId")
-    List<Location> locationList;
+    @ManyToMany
+    private List<Product> productList;
+
+    @OneToMany(targetEntity = Location.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "loc_id", referencedColumnName = "StoreId")
+    private List<Location> locationList;
 
 
 }

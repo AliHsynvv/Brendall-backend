@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class StoreImpl implements StoreInter {
-    private final ProductRepo productRepo;
+
     private final StoreRepo storeRepo;
     private final ModelMapper modelMapper;
 
@@ -87,7 +87,7 @@ public class StoreImpl implements StoreInter {
 
     @Override
     @Transactional
-    public Store update(StoreDto storeDto, long id) {
+    public void update(StoreDto storeDto, long id) {
         log.info("Update.service started");
         Optional<Store> updateSt = storeRepo.findById(id);
         if (updateSt.isPresent()) {
@@ -95,9 +95,9 @@ public class StoreImpl implements StoreInter {
             newStore.setStoreName(storeDto.getStoreName());
             newStore.setStoreIcon(storeDto.getStoreIcon());
 
-            return storeRepo.save(newStore);
+           storeRepo.save(newStore);
         }
         log.info("Update.service success");
-        throw new StoreException(ErrorCodeEnum.NOT_ENOUGH_STORE);
+
     }
 }

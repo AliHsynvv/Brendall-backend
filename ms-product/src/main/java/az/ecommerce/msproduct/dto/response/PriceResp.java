@@ -8,10 +8,10 @@ import java.time.LocalDateTime;
 @Data
 public class PriceResp {
 
-    long priceId;
+    Long priceId;
     BigDecimal amount;
     LocalDateTime startDate;
     LocalDateTime endDate;
-    long productId;
+    Long productId;
     LocalDateTime responseAt;
 }
