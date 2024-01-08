@@ -13,6 +13,21 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class ProductDto {
+
     private Long productId;
+    private String productName;
+    private String description;
+    private boolean isActivated;
+    private boolean isDeleted;
+    private List<Long> colourList;
+    private Long price;
+    private Long discount;
+    private List<Long> feedBackList;
+    private List<Long> sizeList;
+    private List<Long> storeList;
+    private Long gender;
+    private  List<Long> categoryList;
+    private List<Long> imageDataList;
+    private  List<Long> fileDataList;
 
 }
