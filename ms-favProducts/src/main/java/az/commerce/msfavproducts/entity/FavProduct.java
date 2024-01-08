@@ -14,6 +14,8 @@ import lombok.NoArgsConstructor;
 public class FavProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long favId;
-
+       private Long favId;
+       private Long productId;
+       private boolean isActivated;
+       private boolean isDeleted;
 }
