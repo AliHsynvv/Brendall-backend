@@ -1,11 +1,11 @@
 package az.ecommerce.msproduct.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 
 @Entity
@@ -15,16 +15,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ImageData {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long imageDataId;
-
     private String name;
     private String type;
+
     @Lob
-    @Column(name = "imagedata",length = 1000)
+    @Column(name = "imagedata", length = 1000)
     private byte[] imageData;
 
     @ManyToOne
-    private   Product product;
+    @JsonBackReference
+    private Product product;
+
 }

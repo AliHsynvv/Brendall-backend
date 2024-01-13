@@ -1,10 +1,12 @@
 package az.ecommerce.msproduct.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
 
 @Entity
 @Data
@@ -13,6 +15,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 public class FeedBack {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long feedId;
@@ -22,7 +25,7 @@ public class FeedBack {
     private double feedRank;
 
     @ManyToOne
+    @JsonBackReference
     private Product product;
-
 
 }

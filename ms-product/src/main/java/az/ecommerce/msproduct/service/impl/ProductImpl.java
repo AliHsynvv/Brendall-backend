@@ -98,6 +98,7 @@ public class ProductImpl implements ProductInter {
 
     }
 
+
     @Override
     public ProductDto findById(long id) {
         log.info("FindById.service started");
@@ -107,8 +108,9 @@ public class ProductImpl implements ProductInter {
         }
         log.info("FindById.service success");
         return findP.map(productE -> modelMapper.map(productE, ProductDto.class)).orElseThrow();
-
     }
+
+
 
     @Override
     public List<ProductDto> getAllProducts() {

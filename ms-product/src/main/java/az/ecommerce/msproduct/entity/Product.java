@@ -1,6 +1,8 @@
 package az.ecommerce.msproduct.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -20,30 +22,18 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
     private String productName;
+
     @NotBlank(message = "description cannot be empty")
     private String description;
     private boolean isActivated;
     private boolean isDeleted;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    @OneToMany(targetEntity = Colour.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "colourr_id",referencedColumnName = "productId")
-=======
-    @ManyToMany
-=======
-    @OneToMany
->>>>>>> origin/Qiyas
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinTable(
             name = "colour_id",
             joinColumns = @JoinColumn(name = "productId"),
             inverseJoinColumns = @JoinColumn(name = "colourId"))
-<<<<<<< HEAD
->>>>>>> origin/Nicat
-    List<Colour> colourList;
-=======
     private List<Colour> colourList;
->>>>>>> origin/Qiyas
 
     @OneToOne
     @JoinColumn(name = "price_id")
@@ -55,10 +45,12 @@ public class Product {
 
     @OneToMany
     @JoinColumn(name = "feedd_id", referencedColumnName = "productId")
+    @JsonManagedReference
     private List<FeedBack> feedBackList;
 
     @ManyToOne
     @JoinColumn(name = "gender_id")
+    @JsonBackReference
     private Gender gender;
 
     @ManyToMany
@@ -68,25 +60,9 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "categoryId"))
     private List<Category> categoryList;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    @OneToMany(targetEntity = Size.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "siz_id",referencedColumnName = "productId")
-=======
-    @ManyToMany
-=======
-    @OneToMany
->>>>>>> origin/Qiyas
-    @JoinTable(
-            name = "size_id",
-            joinColumns = @JoinColumn(name = "productId"),
-            inverseJoinColumns = @JoinColumn(name = "sizeId"))
-<<<<<<< HEAD
->>>>>>> origin/Nicat
-    List<Size> sizeList;
-=======
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Size> sizeList;
->>>>>>> origin/Qiyas
 
     @ManyToMany
     @JoinTable(
@@ -97,10 +73,12 @@ public class Product {
 
     @OneToMany
     @JoinColumn(name = "file_id", referencedColumnName = "productId")
+    @JsonManagedReference
     private List<FileData> fileDataList;
 
     @OneToMany(targetEntity = ImageData.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "image_id", referencedColumnName = "productId")
+    @JsonManagedReference
     private List<ImageData> imageDataList;
 
 

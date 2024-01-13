@@ -1,10 +1,9 @@
 package az.ecommerce.msproduct.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.util.List;
 
 @Entity
 @Data
@@ -18,13 +17,10 @@ public class Size {
     private Long sizeId;
     private String sizeName;
 
-<<<<<<< HEAD
-    @ManyToMany
-    List<Product> productList;
-=======
     @ManyToOne
+    @JsonBackReference
     private Product product;
->>>>>>> origin/Qiyas
-
 
 }
+
+

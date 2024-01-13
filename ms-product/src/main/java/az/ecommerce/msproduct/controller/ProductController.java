@@ -18,29 +18,31 @@ public class ProductController {
     private final ProductInter productInter;
 
     @PostMapping("/create")
-    public void create(@RequestBody ProductResp productResp){
+    public void create(@RequestBody ProductResp productResp) {
         productInter.create(productResp);
     }
 
     @GetMapping("/findproduct/{id}")
-    public ProductDto findById(@PathVariable long id){
+    public ProductDto findById(@PathVariable long id) {
         return productInter.findById(id);
     }
 
+
+
     @GetMapping("/findall")
-    public List<ProductDto> getAllProducts(){
+    public List<ProductDto> getAllProducts() {
         return productInter.getAllProducts();
     }
 
     @DeleteMapping("/delete/{id}")
     @Transactional
-    public void delete(@PathVariable long id){
+    public void delete(@PathVariable long id) {
         productInter.delete(id);
     }
 
     @PutMapping("/update/{id}")
-    public void update(@RequestBody ProductResp productResp, @PathVariable long id){
-        productInter.update(productResp,id);
+    public void update(@RequestBody ProductResp productResp, @PathVariable long id) {
+        productInter.update(productResp, id);
 
     }
 

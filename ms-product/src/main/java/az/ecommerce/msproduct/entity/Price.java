@@ -1,5 +1,6 @@
 package az.ecommerce.msproduct.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -22,5 +23,6 @@ public class Price {
     private LocalDateTime endDate;
 
     @OneToOne(mappedBy = "price")
+    @JsonBackReference
     private Product product;
 }
