@@ -1,6 +1,7 @@
 package az.ecommerce.msproduct.controller;
 
 import az.ecommerce.msproduct.dto.request.ColourDto;
+import az.ecommerce.msproduct.dto.response.ColourResp;
 import az.ecommerce.msproduct.entity.Colour;
 import az.ecommerce.msproduct.service.inter.ColourInter;
 import lombok.RequiredArgsConstructor;
@@ -22,12 +23,17 @@ public class ColourController {
     }
 
     @GetMapping("/findcolour/{id}")
-    public ColourDto findById(@PathVariable long id) {
+    public ColourResp findById(@PathVariable long id) {
         return colourInter.findById(id);
     }
 
+    @GetMapping("/findcolourbyproductid/{id}")
+    public List<ColourResp> findColourByProductId(@PathVariable long id){
+        return colourInter.findColourByProductId(id);
+    }
+
     @GetMapping("/findall")
-    public List<ColourDto> getAllColours() {
+    public List<ColourResp> getAllColours() {
         return colourInter.getAllColours();
     }
 

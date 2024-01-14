@@ -1,6 +1,8 @@
 package az.ecommerce.msproduct.service.impl;
 
 import az.ecommerce.msproduct.dto.request.DiscountDto;
+import az.ecommerce.msproduct.dto.response.DiscountResp;
+import az.ecommerce.msproduct.dto.response.ProductResp;
 import az.ecommerce.msproduct.entity.Discount;
 import az.ecommerce.msproduct.entity.Product;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
@@ -11,6 +13,7 @@ import az.ecommerce.msproduct.service.inter.DiscountInter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +26,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class DiscountImpl implements DiscountInter {
     private final DiscountRepo discountRepo;
+    private final ProductRepo productRepo;
     private final ModelMapper modelMapper;
 
     @Override
@@ -39,18 +43,27 @@ public class DiscountImpl implements DiscountInter {
     }
 
     @Override
-    public DiscountDto findById(long id) {
+    public DiscountResp findById(long id) {
         log.info("FindById.service started");
         Optional<Discount> findD = discountRepo.findById(id);
         if (findD.isEmpty()) {
             throw new DiscountException(ErrorCodeEnum.DISCOUNT_NOT_FOUND);
         }
         log.info("FindById.service success");
-        return findD.map(discount -> modelMapper.map(discount, DiscountDto.class)).orElseThrow();
+        return findD.map(discount -> modelMapper.map(discount, DiscountResp.class)).orElseThrow();
     }
 
     @Override
-    public List<DiscountDto> getAllDiscounts() {
+    @Lazy
+    public DiscountResp findDiscountByProductId(long id) {
+        Optional<Product> findProduct = productRepo.findById(id);
+        ProductResp productResp = findProduct.map(colourE -> modelMapper.map(colourE, ProductResp.class)).orElseThrow();
+
+        return productResp.getDiscount();
+    }
+
+    @Override
+    public List<DiscountResp> getAllDiscounts() {
         log.info("GetAllDiscounts.service started");
         List<Discount> getAllDiscounts = discountRepo.findAll();
         if (getAllDiscounts.isEmpty()) {
@@ -58,7 +71,7 @@ public class DiscountImpl implements DiscountInter {
         }
         log.info("GetAllColours.service success");
         return getAllDiscounts.stream()
-                .map(discounts -> modelMapper.map(discounts, DiscountDto.class))
+                .map(discounts -> modelMapper.map(discounts, DiscountResp.class))
                 .collect(Collectors.toList());
     }
 

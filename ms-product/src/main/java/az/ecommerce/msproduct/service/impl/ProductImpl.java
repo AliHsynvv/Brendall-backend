@@ -1,7 +1,7 @@
 package az.ecommerce.msproduct.service.impl;
 
-import az.ecommerce.msproduct.dto.request.ProductDto;
 import az.ecommerce.msproduct.dto.response.ProductResp;
+import az.ecommerce.msproduct.dto.request.ProductDto;
 import az.ecommerce.msproduct.entity.*;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
 import az.ecommerce.msproduct.exception.ProductException;
@@ -10,8 +10,6 @@ import az.ecommerce.msproduct.service.inter.ProductInter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,46 +37,46 @@ public class ProductImpl implements ProductInter {
     private final StoreRepo storeRepo;
 
     @Override
-    public void create(ProductResp productResp) {
+    public void create(ProductDto productDto) {
         log.info("Create.service started");
 
-        Price price = priceRepo.findById(productResp.getPriceId()).orElseThrow(null);
+        Price price = priceRepo.findById(productDto.getPriceId()).orElseThrow(null);
 
-        Discount discount = discountRepo.findById(productResp.getDiscountId()).orElseThrow(null);
+        Discount discount = discountRepo.findById(productDto.getDiscountId()).orElseThrow(null);
 
-        Gender gender = genderRepo.findById(productResp.getGenderId()).orElseThrow(null);
+        Gender gender = genderRepo.findById(productDto.getGenderId()).orElseThrow(null);
 
-        List<Category> categories = productResp.getCategoryIds().stream()
+        List<Category> categories = productDto.getCategoryIds().stream()
                 .map(categoryId -> categoryRepo.findById(categoryId).orElseThrow())
                 .collect(Collectors.toList());
 
-        List<FeedBack> feedBacks = productResp.getFeedIds().stream()
+        List<FeedBack> feedBacks = productDto.getFeedIds().stream()
                 .map(feedId -> feedBackRepo.findById(feedId).orElseThrow())
                 .collect(Collectors.toList());
 
-        List<Colour> colours = productResp.getColourIds().stream()
+        List<Colour> colours = productDto.getColourIds().stream()
                 .map(colourId -> colourRepo.findById(colourId).orElseThrow())
                 .collect(Collectors.toList());
 
-        List<FileData> fileDataList = productResp.getFileIds().stream()
+        List<FileData> fileDataList = productDto.getFileIds().stream()
                 .map(fileId -> fileDataRepo.findById(fileId).orElseThrow())
                 .collect(Collectors.toList());
 
-        List<ImageData> imageDataList = productResp.getImageIds().stream()
+        List<ImageData> imageDataList = productDto.getImageIds().stream()
                 .map(imageId -> imageRepo.findById(imageId).orElseThrow())
                 .collect(Collectors.toList());
 
-        List<Store> stores = productResp.getStoreIds().stream()
+        List<Store> stores = productDto.getStoreIds().stream()
                 .map(storeId -> storeRepo.findById(storeId).orElseThrow())
                 .collect(Collectors.toList());
 
-        List<Size> sizes = productResp.getSizeIds().stream()
+        List<Size> sizes = productDto.getSizeIds().stream()
                 .map(sizeId -> sizeRepo.findById(sizeId).orElseThrow())
                 .collect(Collectors.toList());
 
         Product product = Product.builder()
-                .productName(productResp.getProductName())
-                .description(productResp.getDescription())
+                .productName(productDto.getProductName())
+                .description(productDto.getDescription())
                 .isActivated(true)
                 .isDeleted(false)
                 .categoryList(categories)
@@ -100,20 +98,20 @@ public class ProductImpl implements ProductInter {
 
 
     @Override
-    public ProductDto findById(long id) {
+    public ProductResp findById(long id) {
         log.info("FindById.service started");
         Optional<Product> findP = productRepo.findById(id);
         if (findP.isEmpty()) {
             throw new ProductException(ErrorCodeEnum.PRODUCT_NOT_FOUND);
         }
         log.info("FindById.service success");
-        return findP.map(productE -> modelMapper.map(productE, ProductDto.class)).orElseThrow();
+        return findP.map(productE -> modelMapper.map(productE, ProductResp.class)).orElseThrow();
     }
 
 
 
     @Override
-    public List<ProductDto> getAllProducts() {
+    public List<ProductResp> getAllProducts() {
         log.info("GetAllProducts.service started");
         List<Product> getAllProducts = productRepo.findAll();
         if (getAllProducts.isEmpty()) {
@@ -121,7 +119,7 @@ public class ProductImpl implements ProductInter {
         }
         log.info("GetAllProducts.service success");
         return getAllProducts.stream()
-                .map(products -> modelMapper.map(products, ProductDto.class))
+                .map(products -> modelMapper.map(products, ProductResp.class))
                 .collect(Collectors.toList());
     }
 
@@ -141,68 +139,67 @@ public class ProductImpl implements ProductInter {
 
     @Override
     @Transactional
-    public void update(ProductResp productResp, long id) {
+    public void update(ProductDto productDto, long id) {
         log.info("Update.service started");
 
         Product existingProduct = productRepo.findById(id)
                 .orElseThrow(() -> new ProductException(ErrorCodeEnum.PRODUCT_NOT_FOUND));
-        existingProduct.setProductName(productResp.getProductName());
-        existingProduct.setDescription(productResp.getDescription());
+        existingProduct.setProductName(productDto.getProductName());
+        existingProduct.setDescription(productDto.getDescription());
 
-        if (productResp.getPriceId() != null) {
-            Price price = priceRepo.findById(productResp.getPriceId())
+        if (productDto.getPriceId() != null) {
+            Price price = priceRepo.findById(productDto.getPriceId())
                     .orElseThrow(() ->
-                            new IllegalArgumentException("Price not found for ID: " + productResp.getPriceId()));
+                            new IllegalArgumentException("Price not found for ID: " + productDto.getPriceId()));
             existingProduct.setPrice(price);
         }
 
-        if (productResp.getDiscountId() != null) {
-            Discount discount = discountRepo.findById(productResp.getDiscountId())
+        if (productDto.getDiscountId() != null) {
+            Discount discount = discountRepo.findById(productDto.getDiscountId())
                     .orElseThrow(() ->
-                            new IllegalArgumentException("Discount not found for ID: " + productResp.getDiscountId()));
+                            new IllegalArgumentException("Discount not found for ID: " + productDto.getDiscountId()));
             existingProduct.setDiscount(discount);
         }
 
-        if (productResp.getDiscountId() != null) {
-            Gender gender = genderRepo.findById(productResp.getGenderId())
+        if (productDto.getDiscountId() != null) {
+            Gender gender = genderRepo.findById(productDto.getGenderId())
                     .orElseThrow(() ->
-                            new IllegalArgumentException("Gender not found for ID: " + productResp.getGenderId()));
+                            new IllegalArgumentException("Gender not found for ID: " + productDto.getGenderId()));
             existingProduct.setGender(gender);
         }
 
 
-        if (productResp.getSizeIds() != null && !productResp.getSizeIds().isEmpty()) {
-            List<Size> sizes = sizeRepo.findAllById(productResp.getSizeIds());
+        if (productDto.getSizeIds() != null && !productDto.getSizeIds().isEmpty()) {
+            List<Size> sizes = sizeRepo.findAllById(productDto.getSizeIds());
             existingProduct.setSizeList(sizes);
         }
 
-        if (productResp.getColourIds() != null && !productResp.getColourIds().isEmpty()) {
-            List<Colour> colours = colourRepo.findAllById(productResp.getColourIds());
+        if (productDto.getColourIds() != null && !productDto.getColourIds().isEmpty()) {
+            List<Colour> colours = colourRepo.findAllById(productDto.getColourIds());
             existingProduct.setColourList(colours);
         }
-        if (productResp.getCategoryIds() != null && !productResp.getCategoryIds().isEmpty()) {
-            List<Category> categories = categoryRepo.findAllById(productResp.getCategoryIds());
+        if (productDto.getCategoryIds() != null && !productDto.getCategoryIds().isEmpty()) {
+            List<Category> categories = categoryRepo.findAllById(productDto.getCategoryIds());
             existingProduct.setCategoryList(categories);
         }
 
-        if (productResp.getFeedIds() != null && !productResp.getFeedIds().isEmpty()) {
-            List<FeedBack> feedBacks = feedBackRepo.findAllById(productResp.getFeedIds());
+        if (productDto.getFeedIds() != null && !productDto.getFeedIds().isEmpty()) {
+            List<FeedBack> feedBacks = feedBackRepo.findAllById(productDto.getFeedIds());
             existingProduct.setFeedBackList(feedBacks);
         }
-        if (productResp.getFileIds() != null && !productResp.getFileIds().isEmpty()) {
-            List<FileData> fileDataList = fileDataRepo.findAllById(productResp.getFileIds());
+        if (productDto.getFileIds() != null && !productDto.getFileIds().isEmpty()) {
+            List<FileData> fileDataList = fileDataRepo.findAllById(productDto.getFileIds());
             existingProduct.setFileDataList(fileDataList);
         }
-        if (productResp.getImageIds() != null && !productResp.getImageIds().isEmpty()) {
-            List<ImageData> imageDataList = imageRepo.findAllById(productResp.getImageIds());
+        if (productDto.getImageIds() != null && !productDto.getImageIds().isEmpty()) {
+            List<ImageData> imageDataList = imageRepo.findAllById(productDto.getImageIds());
             existingProduct.setImageDataList(imageDataList);
         }
 
-        if (productResp.getStoreIds() != null && !productResp.getStoreIds().isEmpty()) {
-            List<Store> stores = storeRepo.findAllById(productResp.getStoreIds());
+        if (productDto.getStoreIds() != null && !productDto.getStoreIds().isEmpty()) {
+            List<Store> stores = storeRepo.findAllById(productDto.getStoreIds());
             existingProduct.setStoreList(stores);
         }
-
 
         log.info("Update.service success");
         productRepo.save(existingProduct);

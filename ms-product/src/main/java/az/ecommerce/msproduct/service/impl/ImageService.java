@@ -1,17 +1,26 @@
 package az.ecommerce.msproduct.service.impl;
 
+import az.ecommerce.msproduct.dto.response.FileDataResp;
+import az.ecommerce.msproduct.dto.response.ImageDataResp;
+import az.ecommerce.msproduct.dto.response.ProductResp;
+import az.ecommerce.msproduct.dto.response.StoreResp;
 import az.ecommerce.msproduct.entity.FileData;
 import az.ecommerce.msproduct.entity.ImageData;
+import az.ecommerce.msproduct.entity.Product;
 import az.ecommerce.msproduct.repository.FileDataRepo;
 import az.ecommerce.msproduct.repository.ImageRepo;
+import az.ecommerce.msproduct.repository.ProductRepo;
 import az.ecommerce.msproduct.util.ImageUtils;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,7 +28,8 @@ import java.util.Optional;
 public class ImageService {
 
     private final ImageRepo imageRepo;
-
+    private final ModelMapper modelMapper;
+    private final ProductRepo productRepo;
     private final FileDataRepo fileDataRepo;
 
     private final String FOLDER_PATH="C:/Users/HP/Desktop/MyFiles/";
@@ -65,5 +75,21 @@ public class ImageService {
         String filePath=fileData.get().getFilePath();
         byte[] images = Files.readAllBytes(new File(filePath).toPath());
         return images;
+    }
+
+    @Lazy
+    public List<ImageDataResp> findImageByProductId(long id) {
+        Optional<Product> findProduct = productRepo.findById(id);
+        ProductResp productResp = findProduct.map(colourE -> modelMapper.map(colourE, ProductResp.class)).orElseThrow();
+
+        return productResp.getImageDataList();
+    }
+
+    @Lazy
+    public List<FileDataResp> findFileByProductId(long id) {
+        Optional<Product> findProduct = productRepo.findById(id);
+        ProductResp productResp = findProduct.map(colourE -> modelMapper.map(colourE, ProductResp.class)).orElseThrow();
+
+        return productResp.getFileDataList();
     }
 }

@@ -10,9 +10,8 @@ import java.util.List;
 public class GenderResp {
 
     Long genderId;
-    String genderName;
-    List<Long> productIds;
-    LocalDateTime responseAt;
+    String name;
+    LocalDateTime responseAt = LocalDateTime.now();
 }
 
 

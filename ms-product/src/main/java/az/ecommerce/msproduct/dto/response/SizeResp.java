@@ -9,8 +9,7 @@ public class SizeResp {
 
     Long sizeId;
     String sizeName;
-    Long productId;
-    LocalDateTime responseAt;
+    LocalDateTime responseAt = LocalDateTime.now();
 
 
 }

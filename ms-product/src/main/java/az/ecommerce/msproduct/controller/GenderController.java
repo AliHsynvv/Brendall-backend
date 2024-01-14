@@ -1,6 +1,7 @@
 package az.ecommerce.msproduct.controller;
 
 import az.ecommerce.msproduct.dto.request.GenderDto;
+import az.ecommerce.msproduct.dto.response.GenderResp;
 import az.ecommerce.msproduct.entity.Gender;
 import az.ecommerce.msproduct.service.inter.GenderInter;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +22,12 @@ public class GenderController {
     }
 
     @GetMapping("/findgender/{id}")
-    public GenderDto findById(@PathVariable long id) {
+    public GenderResp findById(@PathVariable long id) {
         return genderInter.findById(id);
     }
 
     @GetMapping("/findall")
-    public List<GenderDto> getAllColours() {
+    public List<GenderResp> getAllColours() {
         return genderInter.getAllGenders();
     }
 

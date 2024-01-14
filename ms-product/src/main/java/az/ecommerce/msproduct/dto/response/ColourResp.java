@@ -9,8 +9,7 @@ public class ColourResp {
 
     Long colourId;
     String colourName;
-    Long productId;
-    LocalDateTime responseAt;
+    LocalDateTime responseAt = LocalDateTime.now();
 
 
 }

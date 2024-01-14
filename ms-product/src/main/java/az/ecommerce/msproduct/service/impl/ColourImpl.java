@@ -1,6 +1,8 @@
 package az.ecommerce.msproduct.service.impl;
 
 import az.ecommerce.msproduct.dto.request.ColourDto;
+import az.ecommerce.msproduct.dto.response.ColourResp;
+import az.ecommerce.msproduct.dto.response.ProductResp;
 import az.ecommerce.msproduct.entity.Category;
 import az.ecommerce.msproduct.entity.Colour;
 import az.ecommerce.msproduct.entity.Product;
@@ -12,6 +14,7 @@ import az.ecommerce.msproduct.service.inter.ColourInter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +28,9 @@ import java.util.stream.Collectors;
 public class ColourImpl implements ColourInter {
 
     private final ColourRepo colourRepo;
+    private final ProductRepo productRepo;
     private final ModelMapper modelMapper;
+
     @Override
     public void create(ColourDto colourDto) {
         log.info("Create.service started");
@@ -38,18 +43,28 @@ public class ColourImpl implements ColourInter {
     }
 
     @Override
-    public ColourDto findById(long id) {
+    public ColourResp findById(long id) {
         log.info("FindById.service started");
         Optional<Colour> findC = colourRepo.findById(id);
         if (findC.isEmpty()) {
             throw new ColourException(ErrorCodeEnum.COLOUR_NOT_FOUND);
         }
         log.info("FindById.service success");
-        return findC.map(colourE -> modelMapper.map(colourE, ColourDto.class)).orElseThrow();
+        return findC.map(colourE -> modelMapper.map(colourE, ColourResp.class)).orElseThrow();
     }
 
     @Override
-    public List<ColourDto> getAllColours() {
+    @Lazy
+    public List<ColourResp> findColourByProductId(long id) {
+
+        Optional<Product> findProduct = productRepo.findById(id);
+        ProductResp productResp = findProduct.map(colourE -> modelMapper.map(colourE, ProductResp.class)).orElseThrow();
+
+        return productResp.getColourList();
+    }
+
+    @Override
+    public List<ColourResp> getAllColours() {
         log.info("GetAllColours.service started");
         List<Colour> getAllColours = colourRepo.findAll();
         if (getAllColours.isEmpty()) {
@@ -57,9 +72,10 @@ public class ColourImpl implements ColourInter {
         }
         log.info("GetAllColours.service success");
         return getAllColours.stream()
-                .map(colours -> modelMapper.map(colours, ColourDto.class))
+                .map(colours -> modelMapper.map(colours, ColourResp.class))
                 .collect(Collectors.toList());
     }
+
 
     @Override
     @Transactional
@@ -83,7 +99,7 @@ public class ColourImpl implements ColourInter {
             Colour newColour = updateC.get();
             newColour.setColourName(colourDto.getColourName());
 
-             colourRepo.save(newColour);
+            colourRepo.save(newColour);
         }
         log.info("Update.service success");
 

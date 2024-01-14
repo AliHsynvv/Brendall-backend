@@ -1,5 +1,7 @@
 package az.ecommerce.msproduct.controller;
 
+import az.ecommerce.msproduct.dto.response.FileDataResp;
+import az.ecommerce.msproduct.dto.response.ImageDataResp;
 import az.ecommerce.msproduct.service.impl.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/image")
@@ -50,4 +53,13 @@ public class ImageController {
 
     }
 
+    @GetMapping("/findimagebyproductid/{id}")
+    public List<ImageDataResp> findImageByProductId(@PathVariable long id){
+        return imageService.findImageByProductId(id);
+    }
+
+    @GetMapping("/findfilebyproductid/{id}")
+    public List<FileDataResp> findFileByProductId(@PathVariable long id){
+        return imageService.findFileByProductId(id);
+    }
 }

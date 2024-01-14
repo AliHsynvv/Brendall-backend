@@ -1,6 +1,7 @@
 package az.ecommerce.msproduct.controller;
 
 import az.ecommerce.msproduct.dto.request.SizeDto;
+import az.ecommerce.msproduct.dto.response.SizeResp;
 import az.ecommerce.msproduct.entity.Size;
 import az.ecommerce.msproduct.service.inter.SizeInter;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +22,12 @@ public class SizeController {
     }
 
     @GetMapping("/findsize/{id}")
-    public SizeDto findById(@PathVariable long id) {
+    public SizeResp findById(@PathVariable long id) {
         return sizeInter.findById(id);
     }
 
     @GetMapping("/findall")
-    public List<SizeDto> getAllColours() {
+    public List<SizeResp> getAllColours() {
         return sizeInter.getAllSizes();
     }
 

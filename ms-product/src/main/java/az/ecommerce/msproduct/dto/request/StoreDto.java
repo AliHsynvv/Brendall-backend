@@ -12,8 +12,8 @@ public class StoreDto {
     Long storeId;
     String storeName;
     FileData storeIcon;
-    List<Long> productIds;
-    List<Long> locationIds;
+    List<Long> productList;
+    List<Long> locationList;
 
 
 

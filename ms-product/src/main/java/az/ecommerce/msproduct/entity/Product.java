@@ -60,7 +60,8 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "categoryId"))
     private List<Category> categoryList;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany
+    @JoinColumn(name = "siz_id", referencedColumnName = "productId")
     @JsonManagedReference
     private List<Size> sizeList;
 

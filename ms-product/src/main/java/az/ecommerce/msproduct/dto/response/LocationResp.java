@@ -11,6 +11,5 @@ public class LocationResp {
     Long locationId;
     double latitude;
     double longitude;
-    Long storeId;
-    LocalDateTime responseAt;
+    LocalDateTime responseAt = LocalDateTime.now();
 }

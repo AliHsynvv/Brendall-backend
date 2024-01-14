@@ -1,6 +1,8 @@
 package az.ecommerce.msproduct.service.impl;
 
 import az.ecommerce.msproduct.dto.request.FeedBackDto;
+import az.ecommerce.msproduct.dto.response.FeedBackResp;
+import az.ecommerce.msproduct.dto.response.ProductResp;
 import az.ecommerce.msproduct.entity.FeedBack;
 import az.ecommerce.msproduct.entity.Product;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
@@ -24,6 +26,7 @@ import java.util.stream.Collectors;
 public class FeedBackImpl implements FeedBackInter {
 
     private final FeedBackRepo feedBackRepo;
+    private final ProductRepo productRepo;
     private final ModelMapper modelMapper;
     @Override
     public void create(FeedBackDto feedBackDto) {
@@ -38,7 +41,7 @@ public class FeedBackImpl implements FeedBackInter {
     }
 
     @Override
-    public FeedBackDto findById(long id) {
+    public FeedBackResp findById(long id) {
         log.info("FindById.service started");
         Optional<FeedBack> findF = feedBackRepo.findById(id);
         if (findF.isEmpty()){
@@ -46,18 +49,20 @@ public class FeedBackImpl implements FeedBackInter {
 
         } log.info("FindById.service success");
 
-        return findF.map(feedBack -> modelMapper.map(feedBack, FeedBackDto.class)).orElseThrow();
+        return findF.map(feedBack -> modelMapper.map(feedBack, FeedBackResp.class)).orElseThrow();
     }
 
+
+
     @Override
-    public List<FeedBackDto> getAllFeedBack() {
+    public List<FeedBackResp> getAllFeedBack() {
         log.info("GetAllGenders.service started");
         List<FeedBack> getAllFeedBack = feedBackRepo.findAll();
         if (getAllFeedBack.isEmpty()){
             throw new FeedBackException(ErrorCodeEnum.UNKNOWN_ERROR);
         }
         log.info("GetAllGenders.service success");
-        return getAllFeedBack.stream().map(feedBack -> modelMapper.map(feedBack, FeedBackDto.class))
+        return getAllFeedBack.stream().map(feedBack -> modelMapper.map(feedBack, FeedBackResp.class))
                 .collect(Collectors.toList());
     }
 

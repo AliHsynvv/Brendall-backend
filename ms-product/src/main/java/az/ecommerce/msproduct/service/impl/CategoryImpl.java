@@ -1,6 +1,7 @@
 package az.ecommerce.msproduct.service.impl;
 
 import az.ecommerce.msproduct.dto.request.CategoryDto;
+import az.ecommerce.msproduct.dto.response.CategoryResp;
 import az.ecommerce.msproduct.entity.Category;
 import az.ecommerce.msproduct.entity.Colour;
 import az.ecommerce.msproduct.entity.Product;
@@ -38,18 +39,18 @@ public class CategoryImpl implements CategoryInter {
     }
 
     @Override
-    public CategoryDto findById(long id) {
+    public CategoryResp findById(long id) {
         log.info("FindById.service started");
         Optional<Category> findC = categoryRepo.findById(id);
         if (findC.isEmpty()) {
             throw new CategoryException(ErrorCodeEnum.CATEGORY_NOT_FOUND);
         }
         log.info("FindById.service success");
-        return findC.map(categoryE -> modelMapper.map(categoryE, CategoryDto.class)).orElseThrow();
+        return findC.map(categoryE -> modelMapper.map(categoryE, CategoryResp.class)).orElseThrow();
     }
 
     @Override
-    public List<CategoryDto> getAllCategories() {
+    public List<CategoryResp> getAllCategories() {
         log.info("GetAllCategory.service started");
 
         List<Category> getAllCategories = categoryRepo.findAll();
@@ -58,7 +59,7 @@ public class CategoryImpl implements CategoryInter {
         }
         log.info("GetAllCategory.service success");
         return getAllCategories.stream()
-                .map(categories -> modelMapper.map(categories, CategoryDto.class))
+                .map(categories -> modelMapper.map(categories, CategoryResp.class))
                 .collect(Collectors.toList());
     }
 

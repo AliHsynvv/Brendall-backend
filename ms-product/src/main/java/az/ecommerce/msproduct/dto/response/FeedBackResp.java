@@ -9,8 +9,7 @@ public class FeedBackResp {
 
     Long feedId;
     double feedRank;
-    Long productId;
-    LocalDateTime responseAt;
+    LocalDateTime responseAt = LocalDateTime.now();
 
 
 }

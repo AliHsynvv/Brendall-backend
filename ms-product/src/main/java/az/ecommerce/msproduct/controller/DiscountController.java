@@ -1,6 +1,7 @@
 package az.ecommerce.msproduct.controller;
 
 import az.ecommerce.msproduct.dto.request.DiscountDto;
+import az.ecommerce.msproduct.dto.response.DiscountResp;
 import az.ecommerce.msproduct.entity.Discount;
 import az.ecommerce.msproduct.service.inter.DiscountInter;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +22,17 @@ public class DiscountController {
     }
 
     @GetMapping("/finddiscount/{id}")
-    public DiscountDto findById(@PathVariable long id) {
+    public DiscountResp findById(@PathVariable long id) {
         return discountInter.findById(id);
     }
 
+    @GetMapping("/finddiscountbyproductid/{id}")
+    public DiscountResp findDiscountByProductId(@PathVariable long id) {
+        return discountInter.findDiscountByProductId(id);
+    }
+
     @GetMapping("/findall")
-    public List<DiscountDto> getAllDiscounts() {
+    public List<DiscountResp> getAllDiscounts() {
         return discountInter.getAllDiscounts();
     }
 

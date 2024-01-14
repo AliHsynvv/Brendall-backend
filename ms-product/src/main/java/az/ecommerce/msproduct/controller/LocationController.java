@@ -1,6 +1,7 @@
 package az.ecommerce.msproduct.controller;
 
 import az.ecommerce.msproduct.dto.request.LocationDto;
+import az.ecommerce.msproduct.dto.response.LocationResp;
 import az.ecommerce.msproduct.entity.Location;
 import az.ecommerce.msproduct.service.inter.LocationInter;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +22,12 @@ private final LocationInter locationInter;
     }
 
     @GetMapping("/findlocation/{id}")
-    public LocationDto findById(@PathVariable long id) {
+    public LocationResp findById(@PathVariable long id) {
         return locationInter.findById(id);
     }
 
     @GetMapping("/findall")
-    public List<LocationDto> getAllColours() {
+    public List<LocationResp> getAllColours() {
         return locationInter.getAllLocations();
     }
 

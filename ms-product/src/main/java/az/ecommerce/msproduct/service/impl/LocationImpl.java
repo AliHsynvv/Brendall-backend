@@ -1,6 +1,7 @@
 package az.ecommerce.msproduct.service.impl;
 
 import az.ecommerce.msproduct.dto.request.LocationDto;
+import az.ecommerce.msproduct.dto.response.LocationResp;
 import az.ecommerce.msproduct.entity.Location;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
 import az.ecommerce.msproduct.exception.LocationException;
@@ -38,7 +39,7 @@ public class LocationImpl implements LocationInter {
     }
 
     @Override
-    public LocationDto findById(long id) {
+    public LocationResp findById(long id) {
         log.info("FindById service started");
 
         Optional<Location> findL = locationRepo.findById(id);
@@ -46,11 +47,11 @@ public class LocationImpl implements LocationInter {
             throw new LocationException(ErrorCodeEnum.LOCATION_NOT_FOUND);
         }
         log.info("FindById service success");
-        return findL.map(Loc -> modelMapper.map(Loc, LocationDto.class)).orElseThrow();
+        return findL.map(Loc -> modelMapper.map(Loc, LocationResp.class)).orElseThrow();
     }
 
     @Override
-    public List<LocationDto> getAllLocations() {
+    public List<LocationResp> getAllLocations() {
         log.info("GetAllLocations.service started");
 
         List<Location> getAllLoc = locationRepo.findAll();
@@ -59,7 +60,7 @@ public class LocationImpl implements LocationInter {
         }
         log.info("GetAllLocations.service success");
         return getAllLoc.stream()
-                .map(Loc -> modelMapper.map(Loc, LocationDto.class))
+                .map(Loc -> modelMapper.map(Loc, LocationResp.class))
                 .collect(Collectors.toList());
     }
 

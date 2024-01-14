@@ -2,6 +2,7 @@ package az.ecommerce.msproduct.controller;
 
 
 import az.ecommerce.msproduct.dto.request.PriceDto;
+import az.ecommerce.msproduct.dto.response.PriceResp;
 import az.ecommerce.msproduct.entity.Price;
 import az.ecommerce.msproduct.service.inter.PriceInter;
 import lombok.RequiredArgsConstructor;
@@ -22,12 +23,17 @@ public class PriceController {
     }
 
     @GetMapping("/findprice/{id}")
-    public PriceDto findById(@PathVariable long id) {
+    public PriceResp findById(@PathVariable long id) {
         return priceInter.findById(id);
     }
 
+    @GetMapping("/findpricebyproductid/{id}")
+    public PriceResp findPriceByProductId(@PathVariable long id) {
+        return priceInter.findPriceByProductId(id);
+    }
+
     @GetMapping("/findall")
-    public List<PriceDto> getAllPrices() {
+    public List<PriceResp> getAllPrices() {
         return priceInter.getAllPrices();
     }
 

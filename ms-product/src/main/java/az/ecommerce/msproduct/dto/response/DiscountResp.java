@@ -12,6 +12,5 @@ public class DiscountResp {
     BigDecimal percentage;
     LocalDateTime startDate;
     LocalDateTime endDate;
-    Long productId;
-    LocalDateTime responseAt;
+    LocalDateTime responseAt = LocalDateTime.now();
 }

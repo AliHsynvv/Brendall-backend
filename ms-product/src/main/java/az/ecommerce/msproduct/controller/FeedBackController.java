@@ -2,6 +2,7 @@ package az.ecommerce.msproduct.controller;
 
 import az.ecommerce.msproduct.dto.request.CategoryDto;
 import az.ecommerce.msproduct.dto.request.FeedBackDto;
+import az.ecommerce.msproduct.dto.response.FeedBackResp;
 import az.ecommerce.msproduct.entity.Category;
 import az.ecommerce.msproduct.entity.FeedBack;
 import az.ecommerce.msproduct.service.inter.CategoryInter;
@@ -24,12 +25,12 @@ public class FeedBackController {
     }
 
     @GetMapping("/findfeed/{id}")
-    public FeedBackDto findById(@PathVariable long id) {
+    public FeedBackResp findById(@PathVariable long id) {
         return feedBackInter.findById(id);
     }
 
     @GetMapping("/findall")
-    public List<FeedBackDto> getAllCategories() {
+    public List<FeedBackResp> getAllCategories() {
         return feedBackInter.getAllFeedBack();
     }
 

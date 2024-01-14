@@ -1,6 +1,7 @@
 package az.ecommerce.msproduct.service.impl;
 
 import az.ecommerce.msproduct.dto.request.SizeDto;
+import az.ecommerce.msproduct.dto.response.SizeResp;
 import az.ecommerce.msproduct.entity.Product;
 import az.ecommerce.msproduct.entity.Size;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
@@ -38,18 +39,18 @@ public class SizeImpl implements SizeInter {
     }
 
     @Override
-    public SizeDto findById(long id) {
+    public SizeResp findById(long id) {
         log.info("FindById service started");
         Optional<Size> findS = sizeRepo.findById(id);
         if (findS.isEmpty()) {
             throw new SizeException(ErrorCodeEnum.SIZE_NOT_FOUND);
         }
         log.info("FindById service success");
-        return findS.map(sizeE -> modelMapper.map(sizeE, SizeDto.class)).orElseThrow();
+        return findS.map(sizeE -> modelMapper.map(sizeE, SizeResp.class)).orElseThrow();
     }
 
     @Override
-    public List<SizeDto> getAllSizes() {
+    public List<SizeResp> getAllSizes() {
         log.info("GetAllSizes.service started");
         List<Size> getAllSize = sizeRepo.findAll();
         if (getAllSize.isEmpty()) {
@@ -57,7 +58,7 @@ public class SizeImpl implements SizeInter {
         }
         log.info("GetAllSizes.service success");
         return getAllSize.stream()
-                .map(sizes -> modelMapper.map(sizes, SizeDto.class))
+                .map(sizes -> modelMapper.map(sizes, SizeResp.class))
                 .collect(Collectors.toList());
     }
 
@@ -85,6 +86,5 @@ public class SizeImpl implements SizeInter {
             sizeRepo.save(newSize);
         }
         log.info("Update.service success");
-
     }
 }

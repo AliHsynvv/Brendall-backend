@@ -1,6 +1,8 @@
 package az.ecommerce.msproduct.service.impl;
 
 import az.ecommerce.msproduct.dto.request.PriceDto;
+import az.ecommerce.msproduct.dto.response.PriceResp;
+import az.ecommerce.msproduct.dto.response.ProductResp;
 import az.ecommerce.msproduct.entity.Price;
 import az.ecommerce.msproduct.entity.Product;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
@@ -11,6 +13,7 @@ import az.ecommerce.msproduct.service.inter.PriceInter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,7 +45,7 @@ public class PriceImpl implements PriceInter {
     }
 
     @Override
-    public PriceDto findById(long id) {
+    public PriceResp findById(long id) {
         log.info("FindById.service started");
         Optional<Price> findP = priceRepo.findById(id);
         if ((findP.isEmpty())){
@@ -51,11 +54,20 @@ public class PriceImpl implements PriceInter {
         log.info("FindById.service success");
 
 
-        return findP.map(priceE -> modelMapper.map(priceE, PriceDto.class)).orElseThrow();
+        return findP.map(priceE -> modelMapper.map(priceE, PriceResp.class)).orElseThrow();
     }
 
     @Override
-    public List<PriceDto> getAllPrices() {
+    @Lazy
+    public PriceResp findPriceByProductId(long id) {
+        Optional<Product> findProduct = productRepo.findById(id);
+        ProductResp productResp = findProduct.map(colourE -> modelMapper.map(colourE, ProductResp.class)).orElseThrow();
+
+        return productResp.getPrice();
+    }
+
+    @Override
+    public List<PriceResp> getAllPrices() {
 
         log.info("GetAllPrices.service started");
         List<Price> getAllPrice = priceRepo.findAll();
@@ -63,7 +75,7 @@ public class PriceImpl implements PriceInter {
             throw new PriceException(ErrorCodeEnum.UNKNOWN_ERROR);
         }
         log.info("GetAllPrices.service success");
-        return getAllPrice.stream().map(prices -> modelMapper.map(prices, PriceDto.class))
+        return getAllPrice.stream().map(prices -> modelMapper.map(prices, PriceResp.class))
                 .collect(Collectors.toList());
     }
 

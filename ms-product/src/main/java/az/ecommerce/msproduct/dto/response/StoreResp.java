@@ -12,8 +12,7 @@ public class StoreResp {
     Long storeId;
     String storeName;
     FileData storeIcon;
-    List<Long> productIds;
-    List<Long> locationIds;
-    LocalDateTime responseAt;
+    List<LocationResp> locationList;
+    LocalDateTime responseAt = LocalDateTime.now();
 
 }

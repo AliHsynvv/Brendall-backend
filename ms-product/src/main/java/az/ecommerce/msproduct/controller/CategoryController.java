@@ -1,6 +1,7 @@
 package az.ecommerce.msproduct.controller;
 
 import az.ecommerce.msproduct.dto.request.CategoryDto;
+import az.ecommerce.msproduct.dto.response.CategoryResp;
 import az.ecommerce.msproduct.entity.Category;
 import az.ecommerce.msproduct.service.inter.CategoryInter;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +22,12 @@ public class CategoryController {
     }
 
     @GetMapping("/findcategory/{id}")
-    public CategoryDto findById(@PathVariable long id) {
+    public CategoryResp findById(@PathVariable long id) {
         return categoryInter.findById(id);
     }
 
     @GetMapping("/findall")
-    public List<CategoryDto> getAllCategories() {
+    public List<CategoryResp> getAllCategories() {
         return categoryInter.getAllCategories();
     }
 

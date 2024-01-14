@@ -1,6 +1,8 @@
 package az.ecommerce.msproduct.service.impl;
 
 import az.ecommerce.msproduct.dto.request.StoreDto;
+import az.ecommerce.msproduct.dto.response.ProductResp;
+import az.ecommerce.msproduct.dto.response.StoreResp;
 import az.ecommerce.msproduct.entity.FileData;
 import az.ecommerce.msproduct.entity.Location;
 import az.ecommerce.msproduct.entity.Product;
@@ -16,6 +18,7 @@ import az.ecommerce.msproduct.service.inter.StoreInter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +32,7 @@ import java.util.stream.Collectors;
 public class StoreImpl implements StoreInter {
 
     private final StoreRepo storeRepo;
+    private final ProductRepo productRepo;
     private final ModelMapper modelMapper;
 
     private final LocationRepo locationRepo;
@@ -36,7 +40,7 @@ public class StoreImpl implements StoreInter {
     public void create(StoreDto storeDto) {
         log.info("Create.service started");
 
-        List<Location> locationList = locationRepo.findAllById(storeDto.getLocationIds());
+        List<Location> locationList = locationRepo.findAllById(storeDto.getLocationList());
 
         Store store = Store.builder()
                 .storeName(storeDto.getStoreName())
@@ -49,18 +53,27 @@ public class StoreImpl implements StoreInter {
     }
 
     @Override
-    public StoreDto findById(long id) {
+    public StoreResp findById(long id) {
         log.info("FindById.service started");
         Optional<Store> findSt = storeRepo.findById(id);
         if (findSt.isEmpty()) {
             throw new StoreException(ErrorCodeEnum.STORE_NOT_FOUND);
         }
         log.info("FindById.service success");
-        return findSt.map(findStore -> modelMapper.map(findStore, StoreDto.class)).orElseThrow();
+        return findSt.map(findStore -> modelMapper.map(findStore, StoreResp.class)).orElseThrow();
     }
 
     @Override
-    public List<StoreDto> getAllStores() {
+    @Lazy
+    public List<StoreResp> findStoreByProductId(long id) {
+        Optional<Product> findProduct = productRepo.findById(id);
+        ProductResp productResp = findProduct.map(colourE -> modelMapper.map(colourE, ProductResp.class)).orElseThrow();
+
+        return productResp.getStoreList();
+    }
+
+    @Override
+    public List<StoreResp> getAllStores() {
         log.info("GetAllStores.service started");
         List<Store> getAllStore = storeRepo.findAll();
         if (getAllStore.isEmpty()) {
@@ -68,7 +81,7 @@ public class StoreImpl implements StoreInter {
         }
         log.info("GetAllStores.service success");
         return getAllStore.stream()
-                .map(stores -> modelMapper.map(stores, StoreDto.class))
+                .map(stores -> modelMapper.map(stores, StoreResp.class))
                 .collect(Collectors.toList());
     }
 

@@ -1,6 +1,7 @@
 package az.ecommerce.msproduct.service.impl;
 
 import az.ecommerce.msproduct.dto.request.GenderDto;
+import az.ecommerce.msproduct.dto.response.GenderResp;
 import az.ecommerce.msproduct.entity.Gender;
 import az.ecommerce.msproduct.entity.Product;
 import az.ecommerce.msproduct.enums.ErrorCodeEnum;
@@ -22,7 +23,6 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class GenderImpl implements GenderInter {
-    private final ProductRepo productRepo;
     private final GenderRepo genderRepo;
     private final ModelMapper modelMapper;
 
@@ -38,18 +38,18 @@ public class GenderImpl implements GenderInter {
     }
 
     @Override
-    public GenderDto findById(long id) {
+    public GenderResp findById(long id) {
         log.info("FindById.service started");
         Optional<Gender> findG = genderRepo.findById(id);
         if (findG.isEmpty()) {
             throw new GenderException(ErrorCodeEnum.GENDER_NOT_FOUND);
         }
         log.info("FindById.service success");
-        return findG.map(gender -> modelMapper.map(gender, GenderDto.class)).orElseThrow();
+        return findG.map(gender -> modelMapper.map(gender, GenderResp.class)).orElseThrow();
     }
 
     @Override
-    public List<GenderDto> getAllGenders() {
+    public List<GenderResp> getAllGenders() {
         log.info("GetAllGenders.service started");
         List<Gender> getAllGenders = genderRepo.findAll();
         if (getAllGenders.isEmpty()) {
@@ -57,7 +57,7 @@ public class GenderImpl implements GenderInter {
         }
         log.info("GetAllGenders.service success");
         return getAllGenders.stream()
-                .map(genders -> modelMapper.map(genders, GenderDto.class))
+                .map(genders -> modelMapper.map(genders, GenderResp.class))
                 .collect(Collectors.toList());
     }
 

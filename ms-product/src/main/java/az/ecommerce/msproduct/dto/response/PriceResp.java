@@ -12,6 +12,6 @@ public class PriceResp {
     BigDecimal amount;
     LocalDateTime startDate;
     LocalDateTime endDate;
-    Long productId;
-    LocalDateTime responseAt;
+
+    LocalDateTime responseAt = LocalDateTime.now();
 }
