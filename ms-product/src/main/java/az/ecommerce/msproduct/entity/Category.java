@@ -29,6 +29,8 @@ public class Category {
     @Nullable
     private Category parentCategory;
 
+    private Long parentId;
+
     @ManyToMany(mappedBy = "categoryList")
     private List<Product> productList;
 
