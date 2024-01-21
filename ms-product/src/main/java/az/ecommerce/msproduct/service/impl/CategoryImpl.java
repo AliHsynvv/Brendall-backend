@@ -33,6 +33,7 @@ public class CategoryImpl implements CategoryInter {
         log.info("Create.service started");
         Category category = Category.builder()
                 .name(categoryDto.getName())
+
                 .build();
         categoryRepo.save(category);
         log.info("Created.service success");

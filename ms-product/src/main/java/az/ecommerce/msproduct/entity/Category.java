@@ -26,10 +26,8 @@ public class Category {
 
     @ManyToOne
     @JsonBackReference
-    @Nullable
     private Category parentCategory;
 
-    private Long parentId;
 
     @ManyToMany(mappedBy = "categoryList")
     private List<Product> productList;

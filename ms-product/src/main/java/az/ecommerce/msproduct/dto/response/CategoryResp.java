@@ -13,9 +13,8 @@ public class CategoryResp {
 
     Long categoryId;
     String name;
-    List<Category> subCategory;
-    CategoryResp parentCategory;
-    Long parentId;
+    List<CategoryResp> subCategory;
+//    CategoryResp parentCategory;
     LocalDateTime responseAt = LocalDateTime.now();
 
 }

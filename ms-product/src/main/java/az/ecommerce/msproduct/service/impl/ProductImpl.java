@@ -22,7 +22,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ProductImpl implements ProductInter {
     private final ModelMapper modelMapper;
+
     private final ProductRepo productRepo;
+
+
+
     private final CategoryRepo categoryRepo;
     private final ColourRepo colourRepo;
     private final DiscountRepo discountRepo;
@@ -91,6 +95,7 @@ public class ProductImpl implements ProductInter {
 
         productRepo.save(product);
         log.info("Created.service success");
+
 
     }
 

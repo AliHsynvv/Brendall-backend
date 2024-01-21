@@ -12,8 +12,8 @@ public class CategoryDto {
 
     Long categoryId;
     String name;
-    List<Category> subCategory;
-    Long parentId;
+    List<Long> subCategory;
+    CategoryDto parentCategory;
     List<Long> productIds;
 
 
