@@ -15,7 +15,7 @@ spring:
 
 sample:
   rabbitmq:
-    exchange: default
-    queue: firstStepQueue
-    routingKey: firstRoute
+
+
+
 
